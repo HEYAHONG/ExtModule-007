@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DataBase>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8610_MCU_V3" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8612_MCU_V3" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8613_MCU_V3" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8318_MCU_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x18000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8611_MCU_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x18000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8613_MCU_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xc000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8615_MCU_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x18000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8312_MCU_V1" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x3800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x30000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8612_MCU_V1" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8613_MCU_V1" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x7800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8615_MCU_V1" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x7800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8318_MCU_V1" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x7800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN2026_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN2028_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN7326_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN2026_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN7326_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8211B_SOC_V3" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213_SOC_V3" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN7213_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8211B_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x8000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x40000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213B_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8215_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8217_SOC_V2" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x17000" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8211_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN7213_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x3800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x30000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213B_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x3800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x30000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8215_SOC_B" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x3800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x30000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8211_SOC_C" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8211B_SOC_C" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213_SOC_C" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0x2800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x20000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN7213_SOC_D" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213_SOC_D" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8213B_SOC_D" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+   <Device>
+      <ChipInfo Vendor="Renergy" Name="RN8217_SOC_D" Core="JLINK_CORE_CORTEX_M0" WorkRAMAddr="0x10000000" WorkRAMSize="0xB800" />
+      <FlashBankInfo Name="Code Flash" Loader="Devices/Renergy/RN_CM0_Devices.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" BaseAddr="0x00000000" MaxSize="0x80000" />
+   </Device>
+</DataBase>

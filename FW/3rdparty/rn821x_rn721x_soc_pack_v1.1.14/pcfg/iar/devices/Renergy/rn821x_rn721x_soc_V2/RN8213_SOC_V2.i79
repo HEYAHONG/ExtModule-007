@@ -1,0 +1,29 @@
+[FILEFORMAT]
+rev=1.6
+
+[CHIP]
+name=RN8213_SOC_V2
+endiansupport=le
+thumbsupport=true
+armsupport=false
+fpu=None
+
+trustzone=false
+SIMD=false
+JTAG=false
+SWD=true
+CJTAG=false
+
+[EMUPARAMS]
+
+[CORE]
+name=Cortex-M0
+
+[DDF FILE]
+name=Renergy/RN8213_SOC_V2.ddf
+
+[LINKER FILE]
+name=$TOOLKIT_DIR$/config/linker/Renergy/RN8213_SOC_V2.icf
+
+[FLASH LOADER]
+little=$TOOLKIT_DIR$/config/flashloader/Renergy/RN8213_SOC_V2.board

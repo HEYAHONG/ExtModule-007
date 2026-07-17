@@ -1,0 +1,1335 @@
+/**
+* @file     rn821x_rn721x_soc.h
+* @brief    CMSIS Cortex-M0 Core Peripheral Access Layer Header File
+*           for rn821x_rn721x_soc CM0 Device
+* @version  v1.1.7
+* @note
+* Copyright (C) Renergy Micro-Electronics Co.,LTD.
+******************************************************************************/
+
+#ifndef RN821X_RN721X_SOC_H
+#define RN821X_RN721X_SOC_H
+
+#include "renergy_chip_config.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+/** @addtogroup rn821x_rn721x_soc_Definitions
+     This file defines all structures and symbols for rn821x_rn721x_soc:
+    - registers and bitfields
+    - peripheral base address
+    - peripheral ID
+    - Peripheral definitions
+    @{
+*/
+
+/******************************************************************************/
+/*                Processor and Core Peripherals                              */
+/******************************************************************************/
+/** @addtogroup rn821x_rn721x_soc_CMSIS Device CMSIS Definitions
+     Configuration of the Cortex-M0 Processor and Core Peripherals
+    @{
+*/
+
+/*
+* ==========================================================================
+* ---------- Interrupt Number Definition -----------------------------------
+* ==========================================================================
+*/
+typedef enum IRQn
+{
+
+    /* Cortex-M0 Processor Exceptions Numbers */
+    NonMaskableInt_IRQn = -14, /*!<  2 Cortex-M0 Non Maskable Interrupt                  */
+    HardFault_IRQn = -13,      /*!<  3 Cortex-M0 Hard Fault Interrupt                    */
+
+    SVCall_IRQn = -5, /*!< 11 Cortex-M0 SV Call Interrupt                       */
+
+    PendSV_IRQn = -2,  /*!< 14 Cortex-M0 Pend SV Interrupt                       */
+    SysTick_IRQn = -1, /*!< 15 Cortex-M0 System Tick Interrupt                   */
+
+    /* rn821x_rn721x_soc Specific Interrupt Numbers */
+    SYSCLKCAL_IRQn           = 0,       /*!< 16 SYSCLK CALC or EMU_RCD(v2/v3) Interrupt         */
+    CMP_IRQn                 = 1,       /*!< 17 Voltage compare Interrupt                       */
+    VCH_IRQn                 = 2,       /*!<  18 Power Switch or EMU2(v2) Interrupt             */
+    RTC_IRQn                 = 3,       /*!< 19 RTC Interrupt                                   */
+    EMU_IRQn                 = 4,       /*!< 20 EMU or D2F(v2) Interrupt                        */
+    MADC_IRQn                = 5,       /*!< 21 MADC or FLK(v2) Interrupt                       */
+    UART0_IRQn               = 6,       /*!< 22 UART0 Interrupt                                 */
+    UART1_IRQn               = 7,       /*!< 23 UART1 Interrupt                                 */
+    UART2_IRQn               = 8,       /*!< 24 UART2 Interrupt                                 */
+    UART3_IRQn               = 9,       /*!< 25 UART3 Interrupt                                 */
+    SPI0_IRQn                = 10,      /*!< 26 SPI0(except v3) Interrupt                       */
+    I2C_IRQn                 = 11,      /*!< 27 IIC Interrupt                                   */
+    ISO78160_IRQn            = 12,      /*!< 28 ISO7816 0(except v3) and SPI3(v2/v3) Interrupt  */
+    ISO78161_IRQn            = 13,      /*!< 29 ISO7816 1(except v3) and SPI2(v2) Interrupt     */
+    TC0_IRQn                 = 14,      /*!< 30 Timer/Counter 0(except v3) Interrupt            */
+    TC1_IRQn                 = 15,      /*!< 31 Timer/Counter 1 Interrupt                       */
+    UART4_IRQn               = 16,      /*!< 32 UART4 Interrupt                                 */
+    UART5_IRQn               = 17,      /*!< 33 UART5 Interrupt                                 */
+    WDT_IRQn                 = 18,      /*!< 34 Watch Dog Interrupt                             */
+    KBI_IRQn                 = 19,      /*!< 35 Key Interrupt                                   */
+    LCD_IRQn                 = 20,      /*!< 36 LCD and DSP(v2) Interrupt                       */
+    CP_IRQn                  = 21,      /*!< 37 AES(v3) or SEA(v2) or CP(v1) Interrupt          */
+    DMA_IRQn                 = 22,      /*!< 38 EMU3(v2) or DMA(v2) Interrupt                   */
+    NVM_IRQn                 = 23,      /*!< 39 NVM or SPI1 Interrupt                           */
+    EXT0_IRQn                = 24,      /*!< 40 Extern0 Interrupt  (or all extern irq)          */
+    EXT1_IRQn                = 25,      /*!< 41 Extern1 Interrupt  (v2/v3 share with simp-tc0)  */
+    EXT2_IRQn                = 26,      /*!< 42 Extern2 Interrupt  (v2/v3 share with simp-tc1)  */
+    EXT3_IRQn                = 27,      /*!< 43 Extern3 Interrupt  (v2/v3 share with simp-tc2)  */
+    EXT4_IRQn                = 28,      /*!< 44 Extern4 Interrupt  (v2/v3 share with simp-tc3)  */
+    EXT5_IRQn                = 29,      /*!< 45 Extern5 Interrupt  (v2 share with M2M)          */
+    EXT6_IRQn                = 30,      /*!< 46 Extern6 Interrupt  (v2 share with CRC)          */
+    EXT7_IRQn                = 31,      /*!< 47 Extern7 Interrupt  (v2 share with ECT)          */
+} IRQn_Type;
+
+/*
+ * ==========================================================================
+ * ----------- Processor and Core Peripheral Section ------------------------
+ * ==========================================================================
+ */
+
+/* Configuration of the Cortex-M0 Processor and Core Peripherals */
+#define __MPU_PRESENT 0          /*!< MPU present or not                               */
+#define __NVIC_PRIO_BITS 2       /*!< Number of Bits used for Priority Levels          */
+#define __Vendor_SysTickConfig 0 /*!< Set to 1 if different SysTick Config is used     */
+
+#if 0
+#if defined(__CC_ARM)
+#if defined(__TARGET_FPU_VFP)
+#define __FPU_PRESENT 1 /*!< FPU present or not                               */
+#else
+#define __FPU_PRESENT 0 /*!< FPU present or not                               */
+#endif
+#else
+#define __FPU_PRESENT 0 /*!< FPU present or not                               */
+#endif
+#endif
+/*@}*/ /* end of group rn821x_rn721x_soc_CMSIS */
+
+#include "core_cm0.h" /* Cortex-M0 processor and core peripherals           */
+
+/******************************************************************************/
+/*                Device Specific Peripheral registers structures             */
+/******************************************************************************/
+/** @addtogroup rn821x_rn721x_soc_Peripherals rn821x_rn721x_soc Peripherals
+     rn821x_rn721x_soc Device Specific Peripheral registers structures
+    @{
+*/
+/* GPIO */
+typedef struct
+{
+    __IO uint32_t PMA;                       /* 0x0 */
+    __IO uint32_t PA;                        /* 0x4 */
+    __IO uint32_t PCA0;                      /* 0x8 */
+    __IO uint32_t PCA1;                      /* 0xC */
+    __IO uint32_t PUA;                       /* 0x10 */
+    __IO uint32_t PIMA;                      /* 0x14 */
+    __IO uint32_t PIEA;                      /* 0x18 */
+    __IO uint32_t PMB;                       /* 0x1C */
+    __IO uint32_t PB;                        /* 0x20 */
+    __IO uint32_t PCB;                       /* 0x24 */
+    __IO uint32_t PUB;                       /* 0x28 */
+    __IO uint32_t PIMB;                      /* 0x2C */
+    __IO uint32_t PIEB;                      /* 0x30 */
+    __IO uint32_t PMC;                       /* 0x34 */
+    __IO uint32_t PC;                        /* 0x38 */
+    __IO uint32_t PCC;                       /* 0x3C */
+    __IO uint32_t PUC;                       /* 0x40 */
+    __IO uint32_t PIEC;                      /* 0x44 */
+    __IO uint32_t PIMC;                      /* 0x48 */
+    __IO uint32_t PCB2;                      /* 0x4C */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PMD;                       /* 0x50 */
+    __IO uint32_t PD;                        /* 0x54 */
+    __IO uint32_t PCD;                       /* 0x58 */
+    __IO uint32_t PUD;                       /* 0x5C */
+#else
+    __IO uint32_t RESERVED0[4];              /* 0x50 ~ 0x5C */
+#endif
+    __IO uint32_t PCE;                       /* 0x60 */
+    __IO uint32_t PASET;                     /* 0x64 */
+    __IO uint32_t PACLR;                     /* 0x68 */
+    __IO uint32_t PBSET;                     /* 0x6C */
+    __IO uint32_t PBCLR;                     /* 0x70 */
+    __IO uint32_t PCSET;                     /* 0x74 */
+    __IO uint32_t PCCLR;                     /* 0x78 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PDSET;                     /* 0x7C */
+    __IO uint32_t PDCLR;                     /* 0x80 */
+    __IO uint32_t PIED;                      /* 0x84 */
+    __IO uint32_t PIMD;                      /* 0x88 */
+    __IO uint32_t PCA2;                      /* 0x8C */
+    __IO uint32_t PCA3;                      /* 0x90 */
+    __IO uint32_t PCB3;                      /* 0x94 */
+    __IO uint32_t PCC2;                      /* 0x98 */
+    __IO uint32_t PCC3;                      /* 0x9C */
+    __IO uint32_t PCC4;                      /* 0xA0 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PCC5;                      /* 0xA4 */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t RESERVED0;                 /* 0xA4 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PCD2;                      /* 0xA8 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED0;                 /* 0xAC */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t RESERVED1;                 /* 0xAC */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PIMA2;                     /* 0xB0 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED1;                 /* 0xB4 */
+    __IO uint32_t PCB5;                      /* 0xB8 */
+    __IO uint32_t RESERVED2[18];             /* 0xBC ~ 0x100 */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t RESERVED2[19];             /* 0xB4 ~ 0xFC */
+    __IO uint32_t LURT_CFG;                  /* 0x100 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t IOCFG;                     /* 0x104 */
+#endif
+} GPIO_TypeDef;
+
+/* GPIO_BB */
+typedef struct
+{
+    __IO uint32_t BB_PMA[32];                /* 0x0000 */
+    __IO uint32_t BB_PA[32];                 /* 0x0080 */
+    __IO uint32_t BB_PCA0[32];               /* 0x0100 */
+    __IO uint32_t BB_PCA1[32];               /* 0x0180 */
+    __IO uint32_t BB_PUA[32];                /* 0x0200 */
+    __IO uint32_t BB_PIMA[32];               /* 0x0280 */
+    __IO uint32_t BB_PIEA[32];               /* 0x0300 */
+    __IO uint32_t BB_PMB[32];                /* 0x0380 */
+    __IO uint32_t BB_PB[32];                 /* 0x0400 */
+    __IO uint32_t BB_PCB[32];                /* 0x0480 */
+    __IO uint32_t BB_PUB[32];                /* 0x0500 */
+    __IO uint32_t BB_PIMB[32];               /* 0x0580 */
+    __IO uint32_t BB_PIEB[32];               /* 0x0600 */
+    __IO uint32_t BB_PMC[32];                /* 0x0680 */
+    __IO uint32_t BB_PC[32];                 /* 0x0700 */
+    __IO uint32_t BB_PCC[32];                /* 0x0780 */
+    __IO uint32_t BB_PUC[32];                /* 0x0800 */
+    __IO uint32_t BB_PIEC[32];               /* 0x0880 */
+    __IO uint32_t BB_PIMC[32];               /* 0x0900 */
+    __IO uint32_t BB_PCB2[32];               /* 0x0980 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_PMD[32];                /* 0x0A00 */
+    __IO uint32_t BB_PD[32];                 /* 0x0A80 */
+    __IO uint32_t BB_PCD[32];                /* 0x0B00 */
+    __IO uint32_t BB_PUD[32];                /* 0x0B80 */
+#else
+    __IO uint32_t BB_RESERVED0[4][32];       /* 0x0A00 ~ 0x0B80 */
+#endif
+    __IO uint32_t BB_PCE[32];                /* 0x0C00 */
+    __IO uint32_t BB_PASET[32];              /* 0x0C80 */
+    __IO uint32_t BB_PACLR[32];              /* 0x0D00 */
+    __IO uint32_t BB_PBSET[32];              /* 0x0D80 */
+    __IO uint32_t BB_PBCLR[32];              /* 0x0E00 */
+    __IO uint32_t BB_PCSET[32];              /* 0x0E80 */
+    __IO uint32_t BB_PCCLR[32];              /* 0x0F00 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_PDSET[32];              /* 0x0F80 */
+    __IO uint32_t BB_PDCLR[32];              /* 0x1000 */
+    __IO uint32_t BB_PIED[32];               /* 0x1080 */
+    __IO uint32_t BB_PIMD[32];               /* 0x1100 */
+    __IO uint32_t BB_PCA2[32];               /* 0x1180 */
+    __IO uint32_t BB_PCA3[32];               /* 0x1200 */
+    __IO uint32_t BB_PCB3[32];               /* 0x1280 */
+    __IO uint32_t BB_PCC2[32];               /* 0x1300 */
+    __IO uint32_t BB_PCC3[32];               /* 0x1380 */
+    __IO uint32_t BB_PCC4[32];               /* 0x1400 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_PCC5[32];               /* 0x1480 */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t BB_RESERVED0[32];          /* 0x1480 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_PCD2[32];               /* 0x1500 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_RESERVED0[32];          /* 0x1580 */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t BB_RESERVED1[32];          /* 0x1580 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_PIMA2[32];              /* 0x1600 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_RESERVED1[32];          /* 0x1680 */
+    __IO uint32_t BB_PCB5[32];               /* 0x1700 */
+    __IO uint32_t BB_RESERVED2[18][32];      /* 0x1780 ~ 0x2000 */
+#elif defined(RN821x_RN721x_SOC_V2)
+    __IO uint32_t BB_RESERVED2[19][32];      /* 0x1680 ~ 0x1F80 */
+    __IO uint32_t BB_LURT_CFG[32];           /* 0x2000 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t BB_IOCFG[32];              /* 0x2080 */
+#endif
+} GPIO_BB_TypeDef;
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* DSP */
+typedef struct
+{
+    __IO uint32_t MAC_CTL0;                  /* 0x0 */
+    __IO uint32_t MAC_CTL1;                  /* 0x4 */
+    __IO uint32_t MAC_CTL2;                  /* 0x8 */
+    __IO uint32_t MAC_IN0;                   /* 0xC */
+    __IO uint32_t MAC_IN1;                   /* 0x10 */
+    __IO uint32_t MAC_IN2;                   /* 0x14 */
+    __IO uint32_t MAC_IN3;                   /* 0x18 */
+    __IO uint32_t MAC_IN4;                   /* 0x1C */
+    __IO uint32_t MAC_IN5;                   /* 0x20 */
+    __IO uint32_t MAC_OUT0;                  /* 0x24 */
+    __IO uint32_t MAC_OUT1;                  /* 0x28 */
+    __IO uint32_t MAC_OUT2;                  /* 0x2C */
+    __IO uint32_t MAC_OUT3;                  /* 0x30 */
+    __IO uint32_t DIV_IN0;                   /* 0x34 */
+    __IO uint32_t DIV_IN1;                   /* 0x38 */
+    __IO uint32_t DIV_OUT0;                  /* 0x3C */
+    __IO uint32_t DMA_SRBADR;                /* 0x40 */
+    __IO uint32_t DMA_SIBADR;                /* 0x44 */
+    __IO uint32_t DMA_PRBADR;                /* 0x48 */
+    __IO uint32_t DMA_PIBADR;                /* 0x4C */
+    __IO uint32_t DMA_TRBADR;                /* 0x50 */
+    __IO uint32_t DMA_TIBADR;                /* 0x54 */
+    __IO uint32_t DMA_LEN;                   /* 0x58 */
+    __IO uint32_t IE;                        /* 0x5C */
+    __IO uint32_t FLG;                       /* 0x60 */
+    __IO uint32_t ALU_STA0;                  /* 0x64 */
+    __IO uint32_t ALU_STA1;                  /* 0x68 */
+    __IO uint32_t CRD_CTL;                   /* 0x6C */
+    __IO uint32_t CRD_XIN;                   /* 0x70 */
+    __IO uint32_t CRD_YIN;                   /* 0x74 */
+    __IO uint32_t CRD_AMP;                   /* 0x78 */
+    __IO uint32_t CRD_PHASE;                 /* 0x7C */
+    __IO uint32_t CRD_ANGLE;                 /* 0x80 */
+    __IO uint32_t CRD_COS;                   /* 0x84 */
+    __IO uint32_t CRD_SIN;                   /* 0x88 */
+    __IO uint32_t CRD_IE;                    /* 0x8C */
+    __IO uint32_t CRD_FLG;                   /* 0x90 */
+    __IO uint32_t INTP_LEN;                  /* 0x94 */
+    __IO uint32_t INTP_LOC;                  /* 0x98 */
+    __IO uint32_t INTP_STEP;                 /* 0x9C */
+} DSP_TypeDef;
+#endif
+
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* SIMP_TC */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t LOAD;                      /* 0x4 */
+    __IO uint32_t VAL;                       /* 0x8 */
+} SIMP_TC_TypeDef;
+#endif
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* D2F */
+typedef struct
+{
+    __IO uint32_t HFCONST4;                  /* 0x0 */
+    __IO uint32_t HFCONST5;                  /* 0x4 */
+    __IO uint32_t HFCONST6;                  /* 0x8 */
+    __IO uint32_t HFCONST7;                  /* 0xC */
+    __IO uint32_t CFG;                       /* 0x10 */
+    __IO uint32_t OUT_CFG;                   /* 0x14 */
+    __IO uint32_t IE;                        /* 0x18 */
+    __IO uint32_t IF;                        /* 0x1C */
+    __IO uint32_t D2FFCNT[12];               /* 0x20-0x4C */
+    __IO uint32_t D2FP[12];                  /* 0x50-0x7C */
+    __IO uint32_t D2FE[12];                 /* 0x80-0xAC */
+} D2F_TypeDef;
+
+/* M2M */
+typedef struct
+{
+    __IO uint32_t MODE;                      /* 0x0 */
+    __IO uint32_t CTL;                       /* 0x4 */
+    __IO uint32_t DUMMY;                     /* 0x8 */
+    __IO uint32_t SADDR;                     /* 0xC */
+    __IO uint32_t DADDR;                     /* 0x10 */
+    __IO uint32_t ILEN;                      /* 0x14 */
+    __IO uint32_t IE;                        /* 0x18 */
+    __IO uint32_t IF;                        /* 0x1C */
+} M2M_TypeDef;
+#endif
+
+/* EMU */
+typedef struct
+{
+    __IO uint32_t EMUCON;                    /* 0x0 */
+    __IO uint32_t EMUCON2;                   /* 0x4 */
+    __IO uint32_t HFConst;                   /* 0x8 */
+    __IO uint32_t PStart;                    /* 0xC */
+    __IO uint32_t QStart;                    /* 0x10 */
+    __IO uint32_t GPQA;                      /* 0x14 */
+    __IO uint32_t GPQB;                      /* 0x18 */
+    __IO uint32_t PhsA;                      /* 0x1C */
+    __IO uint32_t PhsB;                      /* 0x20 */
+    __IO uint32_t QPhsCal;                   /* 0x24 */
+    __IO uint32_t APOSA;                     /* 0x28 */
+    __IO uint32_t APOSB;                     /* 0x2C */
+    __IO uint32_t RPOSA;                     /* 0x30 */
+    __IO uint32_t RPOSB;                     /* 0x34 */
+    __IO uint32_t IARMSOS;                   /* 0x38 */
+    __IO uint32_t IBRMSOS;                   /* 0x3C */
+    __IO uint32_t URMSOS;                    /* 0x40 */
+    __IO uint32_t IAGAIN;                    /* 0x44 */
+    __IO uint32_t IBGAIN;                    /* 0x48 */
+    __IO uint32_t UGAIN;                     /* 0x4C */
+    __IO uint32_t IADCOS;                    /* 0x50 */
+    __IO uint32_t IBDCOS;                    /* 0x54 */
+    __IO uint32_t UDCOS;                     /* 0x58 */
+    __IO uint32_t UADD;                      /* 0x5C */
+    __IO uint32_t USAG;                      /* 0x60 */
+    __IO uint32_t IAPEAK;                    /* 0x64 */
+    __IO uint32_t IBPEAK;                    /* 0x68 */
+    __IO uint32_t UPEAK;                     /* 0x6C */
+    __IO uint32_t D2FP;                      /* 0x70 */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t EMUCON3;                   /* 0x74 */
+    __IO uint32_t EMUCON4;                   /* 0x78 */
+    __IO uint32_t EMUCON5;                   /* 0x7C */
+    __IO uint32_t CF_CFG;                    /* 0x80 */
+    __IO uint32_t HWRMS_CFG;                 /* 0x84 */
+    __IO uint32_t HWP_CFG;                   /* 0x88 */
+    __IO uint32_t HWFP_CFG;                  /* 0x8C */
+    __IO uint32_t HWQ_CFG;                   /* 0x90 */
+    __IO uint32_t HFCONST2;                  /* 0x94 */
+    __IO uint32_t HFCONST3;                  /* 0x98 */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t RESERVED0[10];             /* 0x74 ~ 0x98 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t NEG1BIT_EN;                /* 0x9C */
+    __IO uint32_t EMUMODE;                   /* 0xA0 */
+    __IO uint32_t ATCHOP_CFG;                /* 0xA4 */
+    __IO uint32_t FGAIN;                     /* 0xA8 */
+    __IO uint32_t APOSFA;                    /* 0xAC */
+    __IO uint32_t APOSFB;                    /* 0xB0 */
+    __IO uint32_t IAHWRMSOS;                 /* 0xB4 */
+    __IO uint32_t IBHWRMSOS;                 /* 0xB8 */
+    __IO uint32_t UHWRMSOS;                  /* 0xBC */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t ADCIN_CFG;                 /* 0x9C */
+    __IO uint32_t RESERVED1[8];              /* 0xA0 ~ 0xBC */
+#endif
+#if defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_C) || defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED0[19];             /* 0x74 ~ 0xBC */
+#endif
+    __IO uint32_t PF2Cnt;                    /* 0xC0 */
+    __IO uint32_t QF2Cnt;                    /* 0xC4 */
+    __IO uint32_t SF2Cnt;                    /* 0xC8 */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED0[5];           /* 0xCC-0xDC */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t RESERVED2[5];              /* 0xCC ~ 0xDC */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PF2Cnt2;                   /* 0xE0 */
+    __IO uint32_t QF2Cnt2;                   /* 0xE4 */
+    __IO uint32_t PF2Cnt3;                   /* 0xE8 */
+    __IO uint32_t QF2Cnt3;                   /* 0xEC */
+    __IO uint32_t PFCnt2;                    /* 0xF0 */
+    __IO uint32_t QFCnt2;                    /* 0xF4 */
+    __IO uint32_t PFCnt3;                    /* 0xF8 */
+    __IO uint32_t QFCnt3;                    /* 0xFC */
+#else
+    __IO uint32_t RESERVED1[13];             /* 0xCC ~ 0xFC */
+#endif
+    __IO uint32_t PFCnt;                     /* 0x100 */
+    __IO uint32_t QFCnt;                     /* 0x104 */
+    __IO uint32_t SFCnt;                     /* 0x108 */
+    __IO uint32_t IARMS;                     /* 0x10C */
+    __IO uint32_t IBRMS;                     /* 0x110 */
+    __IO uint32_t URMS;                      /* 0x114 */
+    __IO uint32_t Ufreq;                     /* 0x118 */
+    __IO uint32_t PowerPA;                   /* 0x11C */
+    __IO uint32_t PowerPB;                   /* 0x120 */
+    __IO uint32_t PowerQA;                   /* 0x124 */
+    __IO uint32_t PowerQB;                   /* 0x128 */
+    __IO uint32_t PowerSA;                   /* 0x12C */
+    __IO uint32_t PowerSB;                   /* 0x130 */
+    __IO uint32_t EnergyP;                   /* 0x134 */
+    __IO uint32_t EnergyP2;                  /* 0x138 */
+    __IO uint32_t EnergyQ;                   /* 0x13C */
+    __IO uint32_t EnergyQ2;                  /* 0x140 */
+    __IO uint32_t EnergyS;                   /* 0x144 */
+    __IO uint32_t PFA;                       /* 0x148 */
+    __IO uint32_t PFB;                       /* 0x14C */
+    __IO uint32_t ANGLEA;                    /* 0x150 */
+    __IO uint32_t ANGLEB;                    /* 0x154 */
+    __IO uint32_t EMUStatus;                 /* 0x158 */
+    __IO uint32_t SPL_IA;                    /* 0x15C */
+    __IO uint32_t SPL_IB;                    /* 0x160 */
+    __IO uint32_t SPL_U;                     /* 0x164 */
+    __IO uint32_t PowerPA2;                  /* 0x168 */
+    __IO uint32_t PowerPB2;                  /* 0x16C */
+    __IO uint32_t EnergyS2;                  /* 0x170 */
+    __IO uint32_t SPL_PA;                    /* 0x174 */
+    __IO uint32_t SPL_PB;                    /* 0x178 */
+    __IO uint32_t SPL_QA;                    /* 0x17C */
+    __IO uint32_t SPL_QB;                    /* 0x180 */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED1;                 /* 0x184 */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t RESERVED3;                 /* 0x184 */
+#elif defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_C) || defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED2;                 /* 0x184 */
+#endif
+    __IO uint32_t EMUStatus2;                /* 0x188 */
+    __IO uint32_t IE;                        /* 0x18C */
+    __IO uint32_t IF;                        /* 0x190 */
+    __IO uint32_t DMAEN;                     /* 0x194 */
+    __IO uint32_t Rdata;                     /* 0x198 */
+    __IO uint32_t Wdata;                     /* 0x19C */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t IE2;                       /* 0x1A0 */
+    __IO uint32_t IF2;                       /* 0x1A4 */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t RESERVED4[2];              /* 0x1A0 ~ 0x1A4 */
+#else
+    __IO uint32_t RESERVED3[2];              /* 0x1A0 ~ 0x1A4 */
+#endif
+    __IO uint32_t SPCMD;                     /* 0x1A8 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t EMUStatus3;                /* 0x1AC */
+    __IO uint32_t IE3;                       /* 0x1B0 */
+    __IO uint32_t IF3;                       /* 0x1B4 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED2[18];             /* 0x1B8 ~ 0x1FC */
+    __IO uint32_t HW_RMSIA;                  /* 0x200 */
+    __IO uint32_t HW_RMSIB;                  /* 0x204 */
+    __IO uint32_t HW_RMSU;                   /* 0x208 */
+    __IO uint32_t HW_FPA;                    /* 0x20C */
+    __IO uint32_t HW_FPB;                    /* 0x210 */
+    __IO uint32_t SPL_IA2;                   /* 0x214 */
+    __IO uint32_t SPL_IB2;                   /* 0x218 */
+    __IO uint32_t SPL_U2;                    /* 0x21C */
+    __IO uint32_t RESERVED3[3];              /* 0x220 ~ 0x228 */
+    __IO uint32_t SPL_FIA;                   /* 0x22C */
+    __IO uint32_t SPL_FIB;                   /* 0x230 */
+    __IO uint32_t SPL_FU;                    /* 0x234 */
+    __IO uint32_t EnergyP_2;                 /* 0x238 */
+    __IO uint32_t EnergyP2_2;                /* 0x23C */
+    __IO uint32_t EnergyQ_2;                 /* 0x240 */
+    __IO uint32_t EnergyQ2_2;                /* 0x244 */
+    __IO uint32_t EnergyP_3;                 /* 0x248 */
+    __IO uint32_t EnergyP2_3;                /* 0x24C */
+    __IO uint32_t EnergyQ_3;                 /* 0x250 */
+    __IO uint32_t EnergyQ2_3;                /* 0x254 */
+    __IO uint32_t IADCOS_Calc;               /* 0x258 */
+    __IO uint32_t IBDCOS_Calc;               /* 0x25C */
+    __IO uint32_t UDCOS_Calc;                /* 0x260 */
+    __IO uint32_t RESERVED4[39];             /* 0x264 ~ 0x2FC */
+#elif defined RN821x_RN721x_SOC_V3
+    __IO uint32_t RESERVED5[82];             /* 0x1B8 ~ 0x2FC */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t ZXOTCFG;                   /* 0x300 */
+    __IO uint32_t ZXOTI;                     /* 0x304 */
+    __IO uint32_t ZXOTU;                     /* 0x308 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t ROS_CTRL;                  /* 0x30C */
+    __IO uint32_t ROS_DCATTC;                /* 0x310 */
+    __IO uint32_t ROS_Tran_K;                /* 0x314 */
+    __IO uint32_t PQSRUN;                    /* 0x318 */
+    __IO uint32_t RESERVED5[5];              /* 0x31C ~ 0x32C */
+    __IO uint32_t ECT_EN;                    /* 0x330 */
+    __IO uint32_t ECT_IAGain;                /* 0x334 */
+    __IO uint32_t ECT_IBGain;                /* 0x338 */
+    __IO uint32_t ECT_UGain;                 /* 0x33C */
+    __IO uint32_t RESERVED6[48];             /* 0x340 ~ 0x3FC */
+#elif defined(RN821x_RN721x_SOC_V3)
+    __IO uint32_t RESERVED6[61];             /* 0x30C ~ 0x3FC */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t DMA_WAVE_CFG;              /* 0x400 */
+    __IO uint32_t DMA_BUF_CTRL;              /* 0x404 */
+    __IO uint32_t DMA_BUF_BADDR;             /* 0x408 */
+    __IO uint32_t DMA_BUF_DEPTH;             /* 0x40C */
+    __IO uint32_t DMA_GAP_CFG;               /* 0x410 */
+    __IO uint32_t DMA_BUFF_ADDR;             /* 0x414 */
+    __IO uint32_t DMA_ERR_ADDR;              /* 0x418 */
+    __IO uint32_t DMA_CHECKSUM;              /* 0x41C */
+    __IO uint32_t DMA_RCD_CFG;               /* 0x420 */
+    __IO uint32_t DMA_BUF_RCD_CTRL;          /* 0x424 */
+    __IO uint32_t DMA_BUF_RCD_BADDR;         /* 0x428 */
+    __IO uint32_t DMA_BUF_RCD_DEPTH;         /* 0x42C */
+    __IO uint32_t DMA_RCD_GAP_DEPTH;         /* 0x430 */
+    __IO uint32_t DMA_BUF_RCD_ADDR;          /* 0x434 */
+    __IO uint32_t DMA_BUF_RCD_ERR_ADDR;      /* 0x438 */
+    __IO uint32_t RESERVED7[17];             /* 0x43C ~ 0x47C */
+    __IO uint32_t RCD_CTRL;                  /* 0x480 */
+    __IO uint32_t RCD_EN;                    /* 0x484 */
+    __IO uint32_t RCD_ISTH;                  /* 0x488 */
+    __IO uint32_t RCD_INTCFGA;               /* 0x48C */
+    __IO uint32_t RCD_INTCFGB;               /* 0x490 */
+    __IO uint32_t RCD_INTRESA;               /* 0x494 */
+    __IO uint32_t RCD_INTRESB;               /* 0x498 */
+    __IO uint32_t RCD_IE;                    /* 0x49C */
+    __IO uint32_t RCD_IF;                    /* 0x4A0 */
+    __IO uint32_t RCD_STA;                   /* 0x4A4 */
+    __IO uint32_t RESERVED8[2];              /* 0x4A8 ~ 0x4AC */
+    __IO uint32_t TRIG_CTRL;                 /* 0x4B0 */
+    __IO uint32_t TIRG_EN;                   /* 0x4B4 */
+    __IO uint32_t TRIG_STOP;                 /* 0x4B8 */
+    __IO uint32_t TRIG_LEN;                  /* 0x4BC */
+    __IO uint32_t TRIG_DLY;                  /* 0x4C0 */
+    __IO uint32_t TRIG_STA;                  /* 0x4C4 */
+    __IO uint32_t TRIG_LEN2;                 /* 0x4C8 */
+    __IO uint32_t TRIG_STA2;                 /* 0x4CC */
+#endif
+} EMU_TypeDef;
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* EMU_WAVE */
+typedef struct
+{
+    __IO uint32_t WKEY;                      /* 0x0 */
+    __IO uint32_t WAVECFG;                   /* 0x4 */
+    __IO uint32_t WAVECFG2;                  /* 0x8 */
+    __IO uint32_t EN;                        /* 0xC */
+    __IO uint32_t WAVECNT;                   /* 0x10 */
+    __IO uint32_t DC_EN;                     /* 0x14 */
+    __IO uint32_t PhsIA;                 /* 0x18 */
+    __IO uint32_t PhsIB;                 /* 0x1C */
+    __IO uint32_t PhsU;                  /* 0x20 */
+    __IO uint32_t IAGAIN;                    /* 0x24 */
+    __IO uint32_t IBGAIN;                    /* 0x28 */
+    __IO uint32_t UGAIN;                     /* 0x2C */
+    __IO uint32_t RESERVED0[8];              /* 0x30 ~ 0x4C */
+    __IO uint32_t HW_RMSIA;                  /* 0x50 */
+    __IO uint32_t HW_RMSIB;                  /* 0x54 */
+    __IO uint32_t HW_RMSU;                   /* 0x58 */
+    __IO uint32_t HW_PA;                     /* 0x5C */
+    __IO uint32_t HW_PB;                     /* 0x60 */
+} EMU_WAVE_TypeDef;
+#endif
+
+#if defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_B)
+/*--------------------- CP --------------------------------------------------*/
+typedef struct {
+  __IO uint32_t CTRL      ;             /* offset 0x0          CP control register            */
+  __IO uint32_t IN1[6]    ;             /* offset 0x4~0x1c     CP data input register1        */
+  __IO uint32_t IN2[6]    ;             /* offset 0x20~0x3c    CP data input register2        */
+  __IO uint32_t RES[12]   ;             /* offset 0x0x40~0x70  CP data output register        */
+} CP_TypeDef;
+
+typedef struct {
+  __IO uint32_t CTRL      ;             /* offset  0x0         AES ENC control register        */
+  __IO uint32_t STAT      ;             /* offset  0x4         AES ENC status register         */
+  __IO uint32_t RESERVED[2];            /* offset  0x8~0xc     RESERVED address                */
+  __IO uint32_t KEY[8]    ;             /* offset  0x10~0x2c   AES ENC KEY register            */
+  __IO uint32_t PT[4]     ;             /* offset  0x30~3c     AES ENC Plain Text register     */
+  __IO uint32_t IV[4]     ;             /* offset  0x40~4c     AES ENC Initial Vector register */
+  __IO uint32_t CT[4]     ;             /* offset  0x50~5c     AES ENC Cyper Text register     */
+} AES_ENC_TypeDef;
+
+typedef struct {
+  __IO uint32_t CTRL      ;             /* offset  0x0         AES DEC control register        */
+  __IO uint32_t STAT      ;             /* offset  0x4         AES DEC status register         */
+  __IO uint32_t RESERVED[2];            /* offset  0x8~0xc     RESERVED address                */
+  __IO uint32_t KEY[8]    ;             /* offset  0x10~0x2c   AES DEC KEY register            */
+  __IO uint32_t PT[4]     ;             /* offset  0x30~3c     AES DEC Plain Text register     */
+  __IO uint32_t IV[4]     ;             /* offset  0x40~4c     AES DEC Initial Vector register */
+  __IO uint32_t CT[4]     ;             /* offset  0x50~5c     AES DEC Cyper Text register     */
+} AES_DEC_TypeDef;
+
+typedef struct {
+  __IO uint32_t CTRL      ;             /* offset  0x0         GHASH control register          */
+  __IO uint32_t STAT      ;             /* offset  0x4         GHASH status register           */
+  __IO uint32_t RESERVED[2];            /* offset  0x8~0xc     RESERVED address                */
+  __IO uint32_t HT[4]     ;             /* offset  0x10~0x1c   GHASH sub key register          */
+  __IO uint32_t AT[4]     ;             /* offset  0x20~0x2c   GHASH initial vector register   */
+  __IO uint32_t CT[4]     ;             /* offset  0x30~0x3c   GHASH input vector register     */
+  __IO uint32_t RT[4]     ;             /* offset  0x40~0x4c   GHASH output vector register    */
+} GHASH_TypeDef;
+#endif
+
+/* UART */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t BAUD;                      /* 0x4 */
+    __IO uint32_t STA;                       /* 0x8 */
+    __IO uint32_t TXD;                       /* 0xC */
+    __IO uint32_t RXD;                       /* 0x10 */
+    __IO uint32_t FDIV;                      /* 0x14 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t DMA_CTRL;                  /* 0x18 */
+    __IO uint32_t DMA_TBADR;                 /* 0x1C */
+    __IO uint32_t DMA_RBADR;                 /* 0x20 */
+    __IO uint32_t DMA_TLEN;                  /* 0x24 */
+    __IO uint32_t DMA_RLEN;                  /* 0x28 */
+    __IO uint32_t DMA_TADR;                  /* 0x2C */
+    __IO uint32_t DMA_RADR;                  /* 0x30 */
+    __IO uint32_t DMA_IE;                    /* 0x34 */
+    __IO uint32_t DMA_IF;                    /* 0x38 */
+    __IO uint32_t DMA_TO;                    /* 0x3C */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t CF_CTRL;                   /* 0x40 */
+    __IO uint32_t PFDAT;                     /* 0x44 */
+    __IO uint32_t QFDAT;                     /* 0x48 */
+    __IO uint32_t FPFDAT;                    /* 0x4C */
+    __IO uint32_t IRQDAT;                    /* 0x50 */
+    __IO uint32_t CF_OV;                     /* 0x54 */
+    __IO uint32_t TW_CTRL;                   /* 0x58 */
+    __IO uint32_t TW_BAUD;                   /* 0x5C */
+    __IO uint32_t TW_EN;                     /* 0x60 */
+    __IO uint32_t CAL_CTRL;                  /* 0x64 */
+    __IO uint32_t CAL_CNT;                   /* 0x68 */
+#endif
+} UART_TypeDef;
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* TC0 */
+typedef struct
+{
+    __IO uint32_t CNT;                       /* 0x0 */
+    __IO uint32_t PS;                        /* 0x4 */
+    __IO uint32_t RESERVED0;                 /* 0x8 */
+    __IO uint32_t DN;                        /* 0xC */
+    __IO uint32_t RESERVED1;                 /* 0x10 */
+    __IO uint32_t CCD0;                      /* 0x14 */
+    __IO uint32_t CCD1;                      /* 0x18 */
+    __IO uint32_t CCFG;                      /* 0x1C */
+    __IO uint32_t CTRL;                      /* 0x20 */
+    __IO uint32_t CM0;                       /* 0x24 */
+    __IO uint32_t CM1;                       /* 0x28 */
+    __IO uint32_t IE;                        /* 0x2C */
+    __IO uint32_t STA;                       /* 0x30 */
+} TC0_TypeDef;
+#endif
+
+/* TC */
+typedef struct
+{
+    __IO uint32_t CNT;                       /* 0x0 */
+    __IO uint32_t PS;                        /* 0x4 */
+    __IO uint32_t RESERVED0;                 /* 0x8 */
+    __IO uint32_t DN;                        /* 0xC */
+    __IO uint32_t RESERVED1;                 /* 0x10 */
+    __IO uint32_t CCD0;                      /* 0x14 */
+    __IO uint32_t CCD1;                      /* 0x18 */
+    __IO uint32_t CCFG;                      /* 0x1C */
+    __IO uint32_t CTRL;                      /* 0x20 */
+    __IO uint32_t CM0;                       /* 0x24 */
+    __IO uint32_t CM1;                       /* 0x28 */
+    __IO uint32_t IE;                        /* 0x2C */
+    __IO uint32_t STA;                       /* 0x30 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t PWM_CFG;                   /* 0x34 */
+    __IO uint32_t PWM_CTRL;                  /* 0x38 */
+    __IO uint32_t PWM_STA;                   /* 0x3C */
+    __IO uint32_t PWM_CNT;                   /* 0x40 */
+    __IO uint32_t PWM_DMA_BADR;              /* 0x44 */
+    __IO uint32_t PWM_DMA_LEN;               /* 0x48 */
+    __IO uint32_t PWM_DMA_ADR;               /* 0x4C */
+#endif
+} TC_TypeDef;
+
+/* SPI */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t STA;                       /* 0x4 */
+    __IO uint32_t TX;                        /* 0x8 */
+    __IO uint32_t RX;                        /* 0xC */
+    __IO uint32_t TXDFLT;                    /* 0x10 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t DMA_CTRL;                  /* 0x14 */
+    __IO uint32_t DMA_TBADR;                 /* 0x18 */
+    __IO uint32_t DMA_RBADR;                 /* 0x1C */
+    __IO uint32_t DMA_TLEN;                  /* 0x20 */
+    __IO uint32_t DMA_RLEN;                  /* 0x24 */
+    __IO uint32_t DMA_TADR;                  /* 0x28 */
+    __IO uint32_t DMA_RADR;                  /* 0x2C */
+    __IO uint32_t DMA_IE;                    /* 0x30 */
+    __IO uint32_t DMA_FLG;                   /* 0x34 */
+#endif
+} SPI_TypeDef;
+
+/* I2C */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t CLK;                       /* 0x4 */
+    __IO uint32_t STA;                       /* 0x8 */
+    __IO uint32_t ADDR;                      /* 0xC */
+    __IO uint32_t DATA;                      /* 0x10 */
+} I2C_TypeDef;
+
+/* KBI */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t SEL;                       /* 0x4 */
+    __IO uint32_t DATA;                      /* 0x8 */
+    __IO uint32_t MASK;                      /* 0xC */
+} KBI_TypeDef;
+
+/* WDT */
+typedef struct
+{
+    __IO uint32_t EN;                        /* 0x0 */
+    __IO uint32_t CTRL;                      /* 0x4 */
+    __IO uint32_t PASS;                      /* 0x8 */
+    __IO uint32_t RESERVED0[2];              /* 0xC ~ 0x10 */
+    __IO uint32_t HALT;                      /* 0x14 */
+    __IO uint32_t STBY;                      /* 0x18 */
+} WDT_TypeDef;
+
+/* SYSCTL */
+typedef struct
+{
+    __IO uint32_t OSC_CTRL1;                 /* 0x0 */
+    __IO uint32_t SYS_MODE;                  /* 0x4 */
+    __IO uint32_t SYS_PD;                    /* 0x8 */
+    __IO uint32_t ADC_CTRL;                  /* 0xC */
+    __IO uint32_t OSC_CTRL2;                 /* 0x10 */
+    __IO uint32_t SYS_RST;                   /* 0x14 */
+    __IO uint32_t MAP_CTRL;                  /* 0x18 */
+    __IO uint32_t MOD0_EN;                   /* 0x1C */
+    __IO uint32_t MOD1_EN;                   /* 0x20 */
+    __IO uint32_t INTC_EN;                   /* 0x24 */
+    __IO uint32_t KBI_EN;                    /* 0x28 */
+    __IO uint32_t CHIP_ID;                   /* 0x2C */
+    __IO uint32_t SYS_PS;                    /* 0x30 */
+    __IO uint32_t IRFR_CTRL;                 /* 0x34 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t SYS_CFG;                   /* 0x38 */
+    __IO uint32_t RESERVED0[15];             /* 0x3C ~ 0x74 */
+#else
+    __IO uint32_t RESERVED0[16];             /* 0x38 ~ 0x74 */
+#endif
+    __IO uint32_t TRIM_CFG1;                 /* 0x78 */
+    __IO uint32_t TRIM_START;                /* 0x7C */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t DMA_PRI;                   /* 0x80 */
+    __IO uint32_t RESERVED1[27];             /* 0x84 ~ 0xEC */
+    __IO uint32_t FAB_UID0;                  /* 0xF0 */
+    __IO uint32_t FAB_UID1;                  /* 0xF4 */
+    __IO uint32_t RESERVED2;                 /* 0xF8 */
+    __IO uint32_t DMA_PRI2;                  /* 0xFC */
+    __IO uint32_t RESERVED3[5];              /* 0x100 ~ 0x110 */
+    __IO uint32_t ADCIN_CTRL;                /* 0x114 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t SYSCP_CON;                 /* 0x118 */
+#endif
+} SYSCTL_TypeDef;
+
+#if !defined(RN821x_RN721x_SOC_V3)
+/* ISO7816 */
+typedef struct
+{
+    __IO uint32_t CTRL0;                     /* 0x0 */
+    __IO uint32_t CTRL1;                     /* 0x4 */
+    __IO uint32_t CLK;                       /* 0x8 */
+    __IO uint32_t BDDIV0;                    /* 0xC */
+    __IO uint32_t BDDIV1;                    /* 0x10 */
+    __IO uint32_t STA0;                      /* 0x14 */
+    __IO uint32_t STA1;                      /* 0x18 */
+    __IO uint32_t DATA0;                     /* 0x1C */
+    __IO uint32_t DATA1;                     /* 0x20 */
+} ISO7816_TypeDef;
+#endif
+
+/* RTC */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t SC;                        /* 0x4 */
+    __IO uint32_t MN;                        /* 0x8 */
+    __IO uint32_t HR;                        /* 0xC */
+    __IO uint32_t DT;                        /* 0x10 */
+    __IO uint32_t MO;                        /* 0x14 */
+    __IO uint32_t YR;                        /* 0x18 */
+    __IO uint32_t DW;                        /* 0x1C */
+    __IO uint32_t CNT1;                      /* 0x20 */
+    __IO uint32_t CNT2;                      /* 0x24 */
+    __IO uint32_t SCA;                       /* 0x28 */
+    __IO uint32_t MNA;                       /* 0x2C */
+    __IO uint32_t HRA;                       /* 0x30 */
+    __IO uint32_t IE;                        /* 0x34 */
+    __IO uint32_t IF;                        /* 0x38 */
+    __IO uint32_t TEMP;                      /* 0x3C */
+    __IO uint32_t PS;                        /* 0x40 */
+    __IO uint32_t MODE;                      /* 0x44 */
+    __IO uint32_t DOTA0;                     /* 0x48 */
+    __IO uint32_t ALPHAL;                    /* 0x4C */
+    __IO uint32_t ALPHAH;                    /* 0x50 */
+    __IO uint32_t XT0;                       /* 0x54 */
+    __IO uint32_t TADJ;                      /* 0x58 */
+    __IO uint32_t RESERVED0;                 /* 0x5C */
+    __IO uint32_t ZT;                        /* 0x60 */
+    __IO uint32_t DOTAT;                     /* 0x64 */
+    __IO uint32_t RESERVED1[3];              /* 0x68 ~ 0x70 */
+    __IO uint32_t FPTR;                      /* 0x74 */
+    __IO uint32_t FDTR1S;                    /* 0x78 */
+    __IO uint32_t FDTR30S;                   /* 0x7C */
+    __IO uint32_t RESERVED2;                 /* 0x80 */
+    __IO uint32_t FDTR120S;                  /* 0x84 */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED3[15];             /* 0x88 ~ 0xC0 */
+    __IO uint32_t TEMPOS;                    /* 0xC4 */
+    __IO uint32_t RESERVED4;                 /* 0xC8 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED3[17];             /* 0x88 ~ 0xC8 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t CALPS;                     /* 0xCC */
+    __IO uint32_t CAL_T[10];                 /* 0xD0~0xF4 */
+    __IO uint32_t TEMP2;                     /* 0xF8 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED5[13];             /* 0xFC ~ 0x12C */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED4[13];             /* 0xFC ~ 0x12C */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t MODE1;                     /* 0x130 */
+    __IO uint32_t XT1;                       /* 0x134 */
+    __IO uint32_t ALPHA;                     /* 0x138 */
+    __IO uint32_t BETA;                      /* 0x13C */
+    __IO uint32_t GAMMA;                     /* 0x140 */
+    __IO uint32_t ZETA;                      /* 0x144 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED6[2];              /* 0x148 ~ 0x14C */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED5[2];              /* 0x148 ~ 0x14C */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t TPS_START;                 /* 0x150 */
+    __IO uint32_t TEMP_CAL;                  /* 0x154 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED7[12];             /* 0x158 ~ 0x184 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESERVED6[12];             /* 0x158 ~ 0x184 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t TEMPOS2;                   /* 0x188 */
+#endif
+} RTC_TypeDef;
+
+/* MADC */
+typedef struct
+{
+    __IO uint32_t AD_CTRL;                   /* 0x0 */
+    __IO uint32_t AD_START;                  /* 0x4 */
+    __IO uint32_t AD_STAT;                   /* 0x8 */
+    __IO uint32_t AD_DATA;                   /* 0xC */
+    __IO uint32_t LVD_CTRL;                  /* 0x10 */
+    __IO uint32_t LVD_STAT;                  /* 0x14 */
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t AD_CTRL1;                  /* 0x18 */
+    __IO uint32_t AD_DATA2;                  /* 0x1C */
+    __IO uint32_t AD_CTRL3;                  /* 0x20 */
+    __IO uint32_t AD_DATA3;                  /* 0x24 */
+#endif
+} MADC_TypeDef;
+
+/* INTC */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t MODE;                      /* 0x4 */
+    __IO uint32_t MASK;                      /* 0x8 */
+    __IO uint32_t STA;                       /* 0xC */
+} INTC_TypeDef;
+
+/* LCD */
+typedef struct
+{
+    __IO uint32_t CTRL;                      /* 0x0 */
+    __IO uint32_t STA;                       /* 0x4 */
+    __IO uint32_t CLKDIV;                    /* 0x8 */
+    __IO uint32_t BLINK;                     /* 0xC */
+    __IO uint32_t PS;                        /* 0x10 */
+#if !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t RESCTL;                    /* 0x14 */
+    __IO uint32_t RESERVED0[2];              /* 0x18 ~ 0x1C */
+#else
+    __IO uint32_t RESERVED0[3];              /* 0x14 ~ 0x1C */
+#endif
+#if defined(RN821x_RN721x_SOC_C)
+    __IO uint8_t BUF[32];                    /* 0x20 ~ 0x3f */
+#else
+    __IO uint8_t BUF[38];                    /* 0x20 ~ 0x45 */
+    __IO uint8_t RESERVED1[2];               /* 0x46 ~ 0x47 */
+#endif
+} LCD_TypeDef;
+
+/* NVM */
+typedef struct
+{
+    __IO uint32_t IE;                        /* 0x0 */
+    __IO uint32_t IF;                        /* 0x4 */
+    __IO uint32_t LSCFG;                     /* 0x8 */
+    __IO uint32_t LSDCOS;                    /* 0xC */
+    __IO uint32_t LSTHO;                     /* 0x10 */
+    __IO uint32_t LSRMS;                     /* 0x14 */
+    __IO uint32_t LSRMS1;                    /* 0x18 */
+    __IO uint32_t RESERVED0;                 /* 0x1C */
+    __IO uint32_t HFCONST;                   /* 0x20 */
+    __IO uint32_t D2FP0;                     /* 0x24 */
+    __IO uint32_t D2FP1;                     /* 0x28 */
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t LSMODE;                    /* 0x2C */
+    __IO uint32_t LSDCOSIB;                  /* 0x30 */
+    __IO uint32_t LSTHOIB;                   /* 0x34 */
+    __IO uint32_t LSGSIA;                    /* 0x38 */
+    __IO uint32_t LSGSIB;                    /* 0x3C */
+    __IO uint32_t LSRMSIB;                   /* 0x40 */
+    __IO uint32_t LSRMSIB1;                  /* 0x44 */
+    __IO uint32_t LSADCINCFG;                /* 0x48 */
+    __IO uint32_t LSRMSUA;                   /* 0x4C */
+    __IO uint32_t LSPA;                      /* 0x50 */
+    __IO uint32_t LSPB;                      /* 0x54 */
+#endif
+} NVM_TypeDef;
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* FLK */
+typedef struct
+{
+    __IO uint32_t EN;                        /* 0x0 */
+    __IO uint32_t IE;                        /* 0x4 */
+    __IO uint32_t IF;                        /* 0x8 */
+    __IO uint32_t UA_600HZ;                  /* 0xC */
+    __IO uint32_t PASS;                      /* 0x10 */
+} FLK_TypeDef;
+#endif
+
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* IOCNT */
+typedef struct
+{
+    __IO uint32_t CFG0;                      /* 0x0 */
+    __IO uint32_t CFG1;                      /* 0x4 */
+    __IO uint32_t CFG2;                      /* 0x8 */
+    __IO uint32_t CFG3;                      /* 0xC */
+    __IO uint32_t CFG4;                      /* 0x10 */
+    __IO uint32_t RESERVED0[3];              /* 0x14 ~ 0x1C */
+    __IO uint32_t OUT0;                      /* 0x20 */
+    __IO uint32_t OUT1;                      /* 0x24 */
+    __IO uint32_t OUT2;                      /* 0x28 */
+    __IO uint32_t OUT3;                      /* 0x2C */
+    __IO uint32_t OUT4;                      /* 0x30 */
+    __IO uint32_t RESERVED1[3];              /* 0x34 ~ 0x3C */
+    __IO uint32_t CHNL;                      /* 0x40 */
+    __IO uint32_t RESERVED2;                 /* 0x44 */
+    __IO uint32_t CTL;                       /* 0x48 */
+#endif
+#if !defined(RN821x_RN721x_SOC_V2) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+    __IO uint32_t CTL1;                      /* 0x4C */
+    __IO uint32_t CMD;                       /* 0x50 */
+    __IO uint32_t RESERVED3[3];              /* 0x54 ~ 0x5C */
+    __IO uint32_t REMD0;                     /* 0x60 */
+    __IO uint32_t REMD1;                     /* 0x64 */
+    __IO uint32_t REMD2;                     /* 0x68 */
+    __IO uint32_t REMD3;                     /* 0x6C */
+    __IO uint32_t REMD4;                     /* 0x70 */
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+} IOCNT_TypeDef;
+#endif
+
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+/* LPUART */
+typedef struct
+{
+    __IO uint32_t MODE;                      /* 0x0 */
+    __IO uint32_t IE;                        /* 0x4 */
+    __IO uint32_t STA;                       /* 0x8 */
+    __IO uint32_t BAUD;                      /* 0xC */
+    __IO uint32_t TXD;                       /* 0x10 */
+    __IO uint32_t RXD;                       /* 0x14 */
+    __IO uint32_t DMR;                       /* 0x18 */
+} LPUART_TypeDef;
+
+/* CRC */
+typedef struct
+{
+    __IO uint32_t DR;                        /* 0x0 */
+    __IO uint32_t STA;                       /* 0x4 */
+    __IO uint32_t CTRL;                      /* 0x8 */
+    __IO uint32_t INIT;                      /* 0xC */
+    __IO uint32_t POL;                       /* 0x10 */
+    __IO uint32_t XOR;                       /* 0x14 */
+    __IO uint32_t DMA_CTL;                   /* 0x18 */
+    __IO uint32_t DMA_BADR;                  /* 0x1C */
+    __IO uint32_t DMA_LEN;                   /* 0x20 */
+    __IO uint32_t DMA_ADR;                   /* 0x24 */
+    __IO uint32_t DMA_IE;                    /* 0x28 */
+    __IO uint32_t DMA_FLG;                   /* 0x2C */
+} CRC_TypeDef;
+
+/* ECT */
+typedef struct
+{
+    __IO uint32_t WREN;                      /* 0x0 */
+    __IO uint32_t CTRL;                      /* 0x4 */
+    __IO uint32_t EN;                        /* 0x8 */
+    __IO uint32_t STATUS;                    /* 0xC */
+    __IO uint32_t IE;                        /* 0x10 */
+    __IO uint32_t LT_SET;                    /* 0x14 */
+    __IO uint32_t HT_SET;                    /* 0x18 */
+    __IO uint32_t TIMER_SET;                 /* 0x1C */
+    __IO uint32_t PROT_TEMP;                 /* 0x20 */
+    __IO uint32_t PROT_IAGAIN;               /* 0x24 */
+    __IO uint32_t PROT_IBGAIN;               /* 0x28 */
+    __IO uint32_t PROT_UGAIN;                /* 0x2C */
+    __IO uint32_t LT_KIA;                    /* 0x30 */
+    __IO uint32_t LT_KIB;                    /* 0x34 */
+    __IO uint32_t LT_KU;                     /* 0x38 */
+    __IO uint32_t HT_KIA;                    /* 0x3C */
+    __IO uint32_t HT_KIB;                    /* 0x40 */
+    __IO uint32_t HT_KU;                     /* 0x44 */
+    __IO uint32_t TEMP;                      /* 0x48 */
+    __IO uint32_t IAGAIN;                    /* 0x4C */
+    __IO uint32_t IBGAIN;                    /* 0x50 */
+    __IO uint32_t UGAIN;                     /* 0x54 */
+    __IO uint32_t TEMP_UD;                   /* 0x58 */
+} ECT_TypeDef;
+#endif
+
+#if defined(RN821x_RN721x_SOC_D)
+/*--------------------- DMA --------------------------------------------------*/
+typedef struct {
+  __IO uint32_t IE       ;            /* offset = 0x00       */
+  __IO uint32_t STA        ;          /* offset = 0x04       */
+  __IO uint32_t RESERVED[2];          /* offset = 0x08-0x0c  */
+  __IO uint32_t C0CTL     ;           /* offset = 0x10       */
+  __IO uint32_t C0SRC      ;          /* offset = 0x14       */
+  __IO uint32_t C0DST         ;       /* offset = 0x18       */
+  __IO uint32_t C0LEN     ;           /* offset = 0x1C       */
+  __IO uint32_t C1CTL;            		/* offset = 0x20       */
+  __IO uint32_t C1SRC    ;           /* offset = 0x24       */
+  __IO uint32_t C1DST         ;       /* offset = 0x28       */
+  __IO uint32_t C1LEN     ;           /* offset = 0x2C       */
+} DMA_TypeDef;
+#endif
+
+#if defined(__CC_ARM)
+#pragma no_anon_unions
+#endif
+
+/*@}*/ /* end of group rn821x_rn721x_soc_Peripherals */
+/******************************************************************************/
+/*                         Peripheral memory map                              */
+/******************************************************************************/
+/** @addtogroup rn821x_rn721x_soc_MemoryMap rn821x_rn721x_soc Memory Mapping
+  @{
+*/
+
+/* base address */
+#define MADC_BASE       (0x4002C000U)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define CRC_BASE        (0x40074000U)
+#define D2F_BASE        (0x4005C000U)
+#define DSP_BASE        (0x40064000U)
+#define ECT_BASE        (0x40078000U)
+#endif
+#define EMU_BASE        (0x50004000U)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define EMU_WAVE_BASE   (0x40040080U)
+#define FLK_BASE        (0x50020000U)
+#endif
+#define GPIO_BASE       (0x50000000U)
+#define I2C_BASE        (0x40024000U)
+#define INTC_BASE       (0x40044000U)
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define IOCNT_BASE      (0x4006C000U)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3)
+#define ISO7816_BASE    (0x40038000U)
+#endif
+#define KBI_BASE        (0x40028000U)
+#define LCD_BASE        (0x40048000U)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define LPUART_BASE     (0x40070000U)
+#define M2M_BASE        (0x40068000U)
+#endif
+#define NVM_BASE        (0x40040000U)
+#define RTC_BASE        (0x4003C000U)
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SIMP_TC0_BASE   (0x40060000U)
+#define SIMP_TC1_BASE   (0x4006000CU)
+#define SIMP_TC2_BASE   (0x40060018U)
+#define SIMP_TC3_BASE   (0x40060024U)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3)
+#define SPI0_BASE       (0x40020000U)
+#endif
+#if !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SPI1_BASE       (0x40050000U)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SPI2_BASE       (0x40054000U)
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SPI3_BASE       (0x40058000U)
+#endif
+#define SYSCTL_BASE     (0x40034000U)
+#if !defined(RN821x_RN721x_SOC_V3)
+#define TC0_BASE        (0x40010000U)
+#endif
+#define TC1_BASE        (0x40014000U)
+#define UART0_BASE      (0x40000000U)
+#define UART1_BASE      (0x40004000U)
+#define UART2_BASE      (0x40008000U)
+#define UART3_BASE      (0x4000C000U)
+#define UART4_BASE      (0x40018000U)
+#define UART5_BASE      (0x4001C000U)
+#define WDT_BASE        (0x40030000U)
+
+/* bitband base address */
+#define BB_OFFSET       (0x02000000U)
+#define GPIO_BB_BASE     (BB_OFFSET + (GPIO_BASE     & 0xFC000000U) + ((GPIO_BASE & 0x03FFFFFFU) << 5U))
+#define I2C_BB_BASE      (BB_OFFSET + (I2C_BASE      & 0xFC000000U) + ((I2C_BASE & 0x03FFFFFFU) << 5U))
+#if !defined(RN821x_RN721x_SOC_V3)
+#define TC0_BB_BASE      (BB_OFFSET + (TC0_BASE      & 0xFC000000U) + ((TC0_BASE & 0x03FFFFFFU) << 5U))
+#endif
+#define TC1_BB_BASE      (BB_OFFSET + (TC1_BASE      & 0xFC000000U) + ((TC1_BASE & 0x03FFFFFFU) << 5U))
+#define UART0_BB_BASE    (BB_OFFSET + (UART0_BASE    & 0xFC000000U) + ((UART0_BASE & 0x03FFFFFFU) << 5U))
+
+#define UART1_BB_BASE    (BB_OFFSET + (UART1_BASE    & 0xFC000000U) + ((UART1_BASE & 0x03FFFFFFU) << 5U))
+#define UART2_BB_BASE    (BB_OFFSET + (UART2_BASE    & 0xFC000000U) + ((UART2_BASE & 0x03FFFFFFU) << 5U))
+#define UART3_BB_BASE    (BB_OFFSET + (UART3_BASE    & 0xFC000000U) + ((UART3_BASE & 0x03FFFFFFU) << 5U))
+#define UART4_BB_BASE    (BB_OFFSET + (UART4_BASE    & 0xFC000000U) + ((UART4_BASE & 0x03FFFFFFU) << 5U))
+#define UART5_BB_BASE    (BB_OFFSET + (UART5_BASE    & 0xFC000000U) + ((UART5_BASE & 0x03FFFFFFU) << 5U))
+
+
+#if defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_B)
+#define LS_PERIPH_BASE (0x40000000U)
+#define HS_PERIPH_BASE (0x50000000U)
+#define HSP_BASE (HS_PERIPH_BASE)
+#define LSP_BASE (LS_PERIPH_BASE)
+#define ROM_TABLE_BASE   (0xF0000000U)
+#define CP_BASE          (HSP_BASE + 0xC000U)
+#define AES_ENC_BASE     (HSP_BASE + 0xD000U)
+#define AES_DEC_BASE     (HSP_BASE + 0xE000U)
+#define GHASH_BASE       (HSP_BASE + 0xF000U)
+#define DMA_BASE         (LSP_BASE + 0x4c000U)
+#endif
+
+/* #endif */
+/*@}*/ /* end of group rn821x_rn721x_soc_MemoryMap */
+
+/******************************************************************************/
+/*                         Peripheral declaration                             */
+/******************************************************************************/
+#define MADC       ((MADC_TypeDef *)     MADC_BASE)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define CRC        ((CRC_TypeDef *)      CRC_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define D2F        ((D2F_TypeDef *)      D2F_BASE)
+#define DSP        ((DSP_TypeDef *)      DSP_BASE)
+#define ECT        ((ECT_TypeDef *)      ECT_BASE)
+#endif
+#define EMU        ((EMU_TypeDef *)      EMU_BASE)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define EMU_WAVE   ((EMU_WAVE_TypeDef *) EMU_WAVE_BASE)
+#define FLK        ((FLK_TypeDef *)      FLK_BASE)
+#endif
+#define GPIO       ((GPIO_TypeDef *)     GPIO_BASE)
+#define I2C        ((I2C_TypeDef *)      I2C_BASE)
+#define INTC       ((INTC_TypeDef *)     INTC_BASE)
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define IOCNT      ((IOCNT_TypeDef *)    IOCNT_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3)
+#define ISO7816    ((ISO7816_TypeDef *)  ISO7816_BASE)
+#endif
+#define KBI        ((KBI_TypeDef *)      KBI_BASE)
+#define LCD        ((LCD_TypeDef *)      LCD_BASE)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define LPUART     ((LPUART_TypeDef *)   LPUART_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define M2M        ((M2M_TypeDef *)      M2M_BASE)
+#endif
+#define NVM        ((NVM_TypeDef *)      NVM_BASE)
+#define RTC        ((RTC_TypeDef *)      RTC_BASE)
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SIMP_TC0   ((SIMP_TC_TypeDef *)  SIMP_TC0_BASE)
+#define SIMP_TC1   ((SIMP_TC_TypeDef *)  SIMP_TC1_BASE)
+#define SIMP_TC2   ((SIMP_TC_TypeDef *)  SIMP_TC2_BASE)
+#define SIMP_TC3   ((SIMP_TC_TypeDef *)  SIMP_TC3_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3)
+#define SPI       ((SPI_TypeDef *)      SPI0_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_B) && !defined(RN821x_RN721x_SOC_C)
+#define SPI1       ((SPI_TypeDef *)      SPI1_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SPI2       ((SPI_TypeDef *)      SPI2_BASE)
+#endif
+#if !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define SPI3       ((SPI_TypeDef *)      SPI3_BASE)
+#endif
+#define SYSCTL     ((SYSCTL_TypeDef *)   SYSCTL_BASE)
+#if !defined(RN821x_RN721x_SOC_V3) && !defined(RN821x_RN721x_SOC_D) && !defined(RN821x_RN721x_SOC_C) && !defined(RN821x_RN721x_SOC_B)
+#define TC0        ((TC0_TypeDef *)      TC0_BASE)
+#elif defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_C) || defined(RN821x_RN721x_SOC_B)
+#define TC0        ((TC_TypeDef *)       TC0_BASE)
+#endif
+#define TC1        ((TC_TypeDef *)       TC1_BASE)
+#define UART0      ((UART_TypeDef *)     UART0_BASE)
+#define UART1      ((UART_TypeDef *)     UART1_BASE)
+#define UART2      ((UART_TypeDef *)     UART2_BASE)
+#define UART3      ((UART_TypeDef *)     UART3_BASE)
+#define UART4      ((UART_TypeDef *)     UART4_BASE)
+#define UART5      ((UART_TypeDef *)     UART5_BASE)
+#define WDT        ((WDT_TypeDef *)      WDT_BASE)
+
+/* bitband declaration */
+#define GPIO_BB    ((GPIO_BB_TypeDef *)  GPIO_BB_BASE)
+
+#if defined(RN821x_RN721x_SOC_D) || defined(RN821x_RN721x_SOC_B)
+#define CP      ((CP_TypeDef      *) CP_BASE            )
+#define AES_ENC ((AES_ENC_TypeDef *) AES_ENC_BASE       )
+#define AES_DEC ((AES_DEC_TypeDef *) AES_DEC_BASE       )
+#define GHASH   ((GHASH_TypeDef   *) GHASH_BASE         )
+#define DMA     ((DMA_TypeDef     *) DMA_BASE           )
+#endif
+/* bit operations */
+#define REG32(addr) (*(volatile uint32_t *)(uint32_t)(addr))
+#define REG16(addr) (*(volatile uint16_t *)(uint32_t)(addr))
+#define REG8(addr) (*(volatile uint8_t *)(uint32_t)(addr))
+#define BIT(x) ((uint32_t)((uint32_t)0x01U << (x)))
+#define BITS(start, end)  (((0xFFFFFFFFUL >> start) << (start)) & (0xFFFFFFFFUL >> (31U - (uint32_t)(end))))
+#define GET_BITS(regval, start, end) (((regval)&BITS((start), (end))) >> (start))
+
+/*@}*/ /* end of group rn821x_rn721x_soc_Definitions */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* RN821X_RN721X_SOC_H */
+/* r2738 */

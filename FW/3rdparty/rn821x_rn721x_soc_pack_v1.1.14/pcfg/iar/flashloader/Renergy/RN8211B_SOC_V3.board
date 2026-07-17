@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<flash_board>
+  <pass>
+    <loader>$TOOLKIT_DIR$/config/flashloader/Renergy/FlashRN8xxx_256KB.flash</loader>
+    <range>CODE 0x0 0x3FFFF</range>
+  </pass>
+</flash_board>

@@ -18,12 +18,16 @@ MDK5的最低版本为5.43。
 
 ### 设备支持包
 
-官方没有提供设备支持包，此处提供添加了编程算法的设备支持包：
-
--  [Renergy.RN8211B_DFP.1.0.1.pack]( Renergy.RN8211B_DFP.1.0.1.pack)
+[Renergy.RN_CM0_Devices.1.1.14.pack](3rdparty/rn821x_rn721x_soc_pack_v1.1.14/pack/Renergy.RN_CM0_Devices.1.1.14.pack)
 
 注意：如果双击支持包无法正常安装，请从Keil打开`Pack Installer`窗口并使用菜单`File->Import`安装。
 
 # 官方链接
 
 - 官网:https://www.renergy-me.com/
+
+# 目录说明
+
+- [数字]-[名称]：数字为固件编号，名称为固件名称。
+- [3rdparty](3rdparty):第三方源代码。
+

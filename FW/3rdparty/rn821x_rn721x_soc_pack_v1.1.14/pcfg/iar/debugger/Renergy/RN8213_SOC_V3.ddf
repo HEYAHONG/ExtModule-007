@@ -1,0 +1,46 @@
+;; Memory information ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;; Used to define address zones within the ARM address space (Memory). 
+;;
+;;   Name      may be almost anything
+;;   AdrSpace  must be Memory
+;;   StartAdr  start of memory block
+;;   EndAdr    end of memory block
+;;   AccType   type of access, read-only (R), read-write (RW) or SFR (W)
+
+[Memory]
+;;       Name                  AdrSpace    StartAdr    EndAdr      AccType   Width
+Memory = IROM1                   Memory      0x00000000  0x0003FFFF  R
+Memory = IRAM1                   Memory      0x10000000  0x10007FFF  RW
+Memory = MADC                    Memory      0x4002C000  0x4002C043  W
+Memory = EMU                     Memory      0x50004000  0x500044CF  W
+Memory = GPIO                    Memory      0x50000000  0x5000010F  W
+Memory = I2C                     Memory      0x40024000  0x40024013  W
+Memory = INTC                    Memory      0x40044000  0x4004400F  W
+Memory = IOCNT                   Memory      0x4006C000  0x4006C073  W
+Memory = KBI                     Memory      0x40028000  0x4002800F  W
+Memory = LCD                     Memory      0x40048000  0x40048045  W
+Memory = NVM                     Memory      0x40040000  0x40040057  W
+Memory = RTC                     Memory      0x4003C000  0x4003C18B  W
+Memory = SIMP_TC0                Memory      0x40060000  0x4006000B  W
+Memory = SIMP_TC1                Memory      0x4006000C  0x40060017  W
+Memory = SIMP_TC2                Memory      0x40060018  0x40060023  W
+Memory = SIMP_TC3                Memory      0x40060024  0x4006002F  W
+Memory = SPI1                    Memory      0x40050000  0x40050037  W
+Memory = SPI3                    Memory      0x40058000  0x40058037  W
+Memory = SYSCTL                  Memory      0x40034000  0x4003411B  W
+Memory = TC1                     Memory      0x40014000  0x4001404F  W
+Memory = UART0                   Memory      0x40000000  0x4000006B  W
+Memory = UART1                   Memory      0x40004000  0x4000406B  W
+Memory = UART2                   Memory      0x40008000  0x4000806B  W
+Memory = UART3                   Memory      0x4000C000  0x4000C06B  W
+Memory = UART4                   Memory      0x40018000  0x4001806B  W
+Memory = UART5                   Memory      0x4001C000  0x4001C06B  W
+Memory = WDT                     Memory      0x40030000  0x4003001F  W
+Memory = PPB                     Memory      0xE0000000  0xE00FFFFF  W
+
+TrustedRanges = true
+UseSfrFilter = true
+
+[SfrInclude]
+File = RN821X_RN721X_SOC_V3.svd

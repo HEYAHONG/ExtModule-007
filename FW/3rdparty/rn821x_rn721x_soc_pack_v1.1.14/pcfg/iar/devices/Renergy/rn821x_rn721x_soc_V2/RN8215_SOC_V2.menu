@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<optionMenuItem>
+  <tag>RN8215_SOC_V2</tag>
+  <display>RN8215_SOC_V2</display>
+  <data>$CUR_DIR$/RN8215_SOC_V2.i79</data>
+</optionMenuItem>

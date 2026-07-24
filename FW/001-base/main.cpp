@@ -51,6 +51,19 @@ static void HeapInit(void)
         };
         vPortDefineHeapRegions(xHeapRegions);
     }
+#elif defined(HCOMPILER_GCC) || defined(HCOMPILER_CLANG)
+    {
+        extern uint8_t __heap_start__[];
+        extern uint8_t __heap_end__[];
+        uint8_t *       ram1_heap_base= (uint8_t *)__heap_start__;
+        const size_t    ram1_heap_size= ((uintptr_t)__heap_end__)-((uintptr_t)__heap_start__);
+        static const HeapRegion_t xHeapRegions[] =
+        {
+            { (uint8_t *)ram1_heap_base, ram1_heap_size },     // SRAM
+            { NULL, 0 }                                        // 结束标记
+        };
+        vPortDefineHeapRegions(xHeapRegions);
+    }
 #endif
 
 }

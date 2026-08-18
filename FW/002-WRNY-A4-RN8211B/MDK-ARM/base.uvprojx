@@ -339,7 +339,7 @@
               <MiscControls>-Wno-sign-compare -Wno-unused-variable -Wno-unused-parameter -Wno-char-subscripts -Wno-unused-but-set-variable</MiscControls>
               <Define>RN821x_RN721x_SOC_C=1,HBOX_CONFIG_HEADER=hbox_config.h</Define>
               <Undefine></Undefine>
-              <IncludePath>.\;..\;..\..\3rdparty\rn8xxx_ll_v1.4.0\inc;..\..\3rdparty\rn821x_rn721x_soc_pack_v1.1.14\cmsis\inc;..\CMSIS;..\..\3rdparty\HCppBox\master\hbox;..\..\3rdparty\HCppBox\master\hbox\cpp;..\FreeRTOS-Port</IncludePath>
+              <IncludePath>.\;..\;..\..\3rdparty\rn8xxx_ll_v1.4.0\inc;..\..\3rdparty\rn821x_rn721x_soc_pack_v1.1.14\cmsis\inc;..\CMSIS;..\..\3rdparty\HCppBox\master\hbox;..\..\3rdparty\HCppBox\master\hbox\cpp;..\FreeRTOS-Port;..\..\3rdparty\Keil_RN8211B_Lib\NVM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1396,6 +1396,21 @@
               <FileName>portasm.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS-Port\portasm.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RN8211B_Nvm</GroupName>
+          <Files>
+            <File>
+              <FileName>rn821x_nvm.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\3rdparty\Keil_RN8211B_Lib\NVM\rn821x_nvm.lib</FilePath>
+            </File>
+            <File>
+              <FileName>nvm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\3rdparty\Keil_RN8211B_Lib\NVM\nvm.h</FilePath>
             </File>
           </Files>
         </Group>

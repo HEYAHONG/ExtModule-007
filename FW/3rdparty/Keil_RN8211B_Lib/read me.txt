@@ -1,0 +1,59 @@
+锐能微keil支持库函数目录结构如下
+nvm------------->nvm.h（V1.5）		 
+		 rn821x_nvm.lib（V1.5）
+rtc------------->rtc.h（V1.1）		
+		 rn821x_rtc.lib（V1.2）
+SYSCTRL--------->sysctrl.h（V1.2）		
+		 rn821x_sysctrl.lib（V1.51）
+		 
+
+2017-3-31 更新以下文档到V1.1
+nvm------------->nvm.h			 
+		 rn821x_nvm.lib
+SYSCTRL--------->sysctrl.h		 
+		 rn821x_sysctrl.lib
+	更新内容如下：
+ 	新增支持C版芯片,并向下兼容
+	新增支持新推型号芯片RN8318,RN8611，RN8612，RN8613，RN8615
+2017-4-11 更新以下文档到V1.2
+nvm------------->nvm.h		 
+		 rn821x_nvm.lib
+	更新内容如下：
+	修订库函数，以规避boot中的eeprom编程错误
+2017-4-21 更新以下文档到V1.3
+nvm------------->nvm.h		 
+		 rn821x_nvm.lib
+	更新内容如下：
+	删除不用的eeprom操作函数
+2017-4-21 更新以下文档到V1.2
+SYSCTRL--------->sysctrl.h		 
+		 rn821x_sysctrl.lib
+	更新内容如下：
+	修订不同时钟下，读写EEPROM及FLASH的wait时钟
+2017-8-17 更新以下文档到V1.3
+SYSCTRL--------->rn831x_sysctrl.lib
+	更新内容如下：
+	修正getChipid()函数内开启SYS_TC apb clk的bug（没有打开SYS_PS）
+2017-8-25 更新以下文档到V1.1
+rtc------------->rtc.h（V1.1）		
+		 rn821x_rtc.lib（V1.1）
+	更新内容如下：	
+ 	1. 增加VBAT异常后寄存器的恢复功能                      
+	
+2017-9-8 更新以下文档到V1.2
+rtc------------->rn821x_rtc.lib（V1.2）
+	更新内容如下：	
+ 	1. 完善VBAT异常后寄存器的恢复功能     
+2018-1-12 更新以下文档到V1.5
+SYSCTRL--------->rn821x_sysctrl.lib
+	更新内容如下：
+	为切换到外部高频时增加延时  
+2018-2-05 更新以下文档到V1.51
+SYSCTRL--------->rn821x_sysctrl.lib
+	更新内容如下：
+	增加外部高频有效性判断
+2020-07-13 更新以下文档到V1.5
+NVM------------->nvm.h			 
+		 rn821x_nvm.lib
+	更新内容如下：修订C版eepromProgram操作函数在写非字对齐时的错误，规避boot中的错误
+	

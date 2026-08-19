@@ -29,6 +29,8 @@ RN8211B(C) 支持段码屏幕。可支持多种模式。
 
 驱动实现见[drv_lcd.h](drv_lcd.h)与[drv_lcd.cpp](drv_lcd.cpp)。
 
+<img src="../../HW/3rdparty/微瑞能源/5位8字LCD段码屏.jpg" alt="5位8字LCD段码屏" style="zoom:25%;" />
+
 # 栈
 
 由于RN8211B的内存非常小,所以各任务栈均非常小，一定要注意栈的使用。

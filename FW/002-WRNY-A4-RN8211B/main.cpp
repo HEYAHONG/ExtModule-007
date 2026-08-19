@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "flashdb.h"
+#include "drv_lcd.h"
 
 static void hw_feed()
 {
@@ -98,6 +99,7 @@ void vApplicationIdleHook( void )
  */
 static void hbox_task_entry(void *usr)
 {
+    lcd_init();
     flashdb_init();
     hcpprt_init();
     while(1)

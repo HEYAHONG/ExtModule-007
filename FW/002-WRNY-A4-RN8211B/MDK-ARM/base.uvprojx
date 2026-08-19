@@ -403,6 +403,11 @@
               <FileType>1</FileType>
               <FilePath>..\fal_cfg.c</FilePath>
             </File>
+            <File>
+              <FileName>drv_lcd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\drv_lcd.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

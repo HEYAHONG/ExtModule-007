@@ -27,7 +27,7 @@ RN8211B(C) 支持段码屏幕。可支持多种模式。
 
 本工程中采用8COM模式(COM引脚采用COM0~COM3，SEG引脚采用SEG20~SEG29),对应的显示缓冲为LCD_BUF16~LCDBUF25。
 
-驱动实现见[drv_lcd.h](drv_lcd.h)与[drv_lcd.c](drv_lcd.c)。
+驱动实现见[drv_lcd.h](drv_lcd.h)与[drv_lcd.cpp](drv_lcd.cpp)。
 
 # 栈
 

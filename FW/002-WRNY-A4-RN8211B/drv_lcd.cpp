@@ -69,3 +69,34 @@ void lcd_buf_set(size_t index,uint8_t data)
 
     LCD->BUF[16+index]=data;
 }
+
+void    lcd_seg_set(size_t index,bool is_set)
+{
+    if(index >= 40)
+    {
+        return;
+    }
+    uint8_t data= lcd_buf_get(index/4);
+    if(is_set)
+    {
+        data |= (1U << (index %4));
+    }
+    else
+    {
+        data &= (~(1U << (index %4)));
+    }
+    lcd_buf_set(index/4,data);
+
+}
+bool    lcd_seg_get(size_t index)
+{
+    if(index >= 40)
+    {
+        return false;
+    }
+
+
+    uint8_t data= lcd_buf_get(index/4);
+
+    return (data& (1U << (index %4)))!=0;
+}

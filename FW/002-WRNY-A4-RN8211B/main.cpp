@@ -103,7 +103,7 @@ static void hbox_task_entry(void *usr)
     while(1)
     {
         hcpprt_loop();
-        vTaskDelay(1);
+        vTaskDelay(5);
     }
 }
 

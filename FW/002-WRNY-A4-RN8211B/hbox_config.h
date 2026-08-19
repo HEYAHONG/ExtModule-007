@@ -42,5 +42,15 @@
  */
 #define HDEFAULTS_SYSCALL_NO_IMPLEMENTATION 1
 
+/*
+ * 启用FlashDB
+ */
+#define FDB_USING_FAL_MODE 1
+
+
+/*
+ * FlashDB启用64位时间戳
+ */
+#define FDB_USING_TIMESTAMP_64BIT 1
 
 #endif  // __HBOX_CONFIG_H__

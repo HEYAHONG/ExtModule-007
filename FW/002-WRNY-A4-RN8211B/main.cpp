@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "flashdb.h"
 
 static void hw_feed()
 {
@@ -97,6 +98,7 @@ void vApplicationIdleHook( void )
  */
 static void hbox_task_entry(void *usr)
 {
+    flashdb_init();
     hcpprt_init();
     while(1)
     {

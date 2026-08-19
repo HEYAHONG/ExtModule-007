@@ -339,7 +339,7 @@
               <MiscControls>-Wno-sign-compare -Wno-unused-variable -Wno-unused-parameter -Wno-char-subscripts -Wno-unused-but-set-variable</MiscControls>
               <Define>RN821x_RN721x_SOC_C=1,HBOX_CONFIG_HEADER=hbox_config.h</Define>
               <Undefine></Undefine>
-              <IncludePath>.\;..\;..\..\3rdparty\rn8xxx_ll_v1.4.0\inc;..\..\3rdparty\rn821x_rn721x_soc_pack_v1.1.14\cmsis\inc;..\CMSIS;..\..\3rdparty\HCppBox\master\hbox;..\..\3rdparty\HCppBox\master\hbox\cpp;..\FreeRTOS-Port;..\..\3rdparty\Keil_RN8211B_Lib\NVM</IncludePath>
+              <IncludePath>.\;..\;..\..\3rdparty\rn8xxx_ll_v1.4.0\inc;..\..\3rdparty\rn821x_rn721x_soc_pack_v1.1.14\cmsis\inc;..\CMSIS;..\..\3rdparty\HCppBox\master\hbox;..\..\3rdparty\HCppBox\master\hbox\cpp;..\FreeRTOS-Port;..\..\3rdparty\Keil_RN8211B_Lib\NVM;..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\source;..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\port</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -397,6 +397,11 @@
               <FileName>hbox_config.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\hbox_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\fal_cfg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1411,6 +1416,56 @@
               <FileName>nvm.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\3rdparty\Keil_RN8211B_Lib\NVM\nvm.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FlashDB</GroupName>
+          <Files>
+            <File>
+              <FileName>flashdb_fal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fal.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fal_partition.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fal_partition.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fal_rtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fal_rtt.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fdb_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fdb_file.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fdb_kvdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fdb_kvdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fdb_tsdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fdb_tsdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>flashdb_fdb_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\3rdparty\HCppBox\master\hbox\hstandalone\hflashdb\3rdparty\flashdb_fdb_utils.c</FilePath>
             </File>
           </Files>
         </Group>

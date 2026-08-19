@@ -112,8 +112,8 @@ void flashdb_init(void)
     fdb_kvdb_control(&fdb_kvdb1, FDB_KVDB_CTRL_SET_LOCK, (void *)fdb_kvdb1_lock);
     fdb_kvdb_control(&fdb_kvdb1, FDB_KVDB_CTRL_SET_UNLOCK, (void *)fdb_kvdb1_unlock);
     fdb_kvdb_init(&fdb_kvdb1,"fdb_kvdb1","fdb_kvdb1",NULL,NULL);
-    fdb_tsdb_control(&fdb_tsdb1, FDB_KVDB_CTRL_SET_LOCK, (void *)fdb_tsdb1_lock);
-    fdb_tsdb_control(&fdb_tsdb1, FDB_KVDB_CTRL_SET_UNLOCK, (void *)fdb_tsdb1_unlock);
+    fdb_tsdb_control(&fdb_tsdb1, FDB_TSDB_CTRL_SET_LOCK, (void *)fdb_tsdb1_lock);
+    fdb_tsdb_control(&fdb_tsdb1, FDB_TSDB_CTRL_SET_UNLOCK, (void *)fdb_tsdb1_unlock);
     fdb_tsdb_init(&fdb_tsdb1,"fdb_tsdb1","fdb_tsdb1",fdb_tsdb1_get_time,32,NULL);
 
 }

@@ -156,9 +156,9 @@ typedef enum
 
 typedef enum
 {
-    LL_SYSC_ADCCHN_U =  (0U),
-    LL_SYSC_ADCCHN_I1 = (1U),
-    LL_SYSC_ADCCHN_I2 = (2U)
+    LL_SYSC_ADCCHN_U =  (2U),
+    LL_SYSC_ADCCHN_I1 = (0U),
+    LL_SYSC_ADCCHN_I2 = (1U)
 }eLL_SYSC_ADCChannel_TypeDef;
 
 typedef enum

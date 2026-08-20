@@ -1,4 +1,4 @@
-#ifndef __DRV_LCD_H__
+ï»¿#ifndef __DRV_LCD_H__
 #define __DRV_LCD_H__
 
 #include "stdlib.h"
@@ -13,14 +13,14 @@ extern "C"
 void lcd_init(void);
 
 /*
- * ÉèÖÃÏÔÊ¾»º³å
+ * è®¾ç½®æ˜¾ç¤ºç¼“å†²
  */
 uint8_t lcd_buf_get(size_t index);
 void    lcd_buf_set(size_t index,uint8_t data);
 
 
 /*
- * ÉèÖÃ¶Î(5Î»8×Ö¹²40¶Î)
+ * è®¾ç½®æ®µ(5ä½8å­—å…±40æ®µ)
  */
 enum
 {
@@ -77,14 +77,14 @@ void    lcd_seg_set(size_t index,bool is_set);
 bool    lcd_seg_get(size_t index);
 
 /*
- * ÉèÖÃÆß¶ÎÊıÂëÏÔÊ¾¡£
- * Êı¾İÎ» 0 1 2 3 4 5 6 7
- * ÏÔÊ¾¶Î a b c d e f g dp
+ * è®¾ç½®ä¸ƒæ®µæ•°ç æ˜¾ç¤ºã€‚
+ * æ•°æ®ä½ 0 1 2 3 4 5 6 7
+ * æ˜¾ç¤ºæ®µ a b c d e f g dp
  */
 uint8_t lcd_7_seg_get(size_t index);
 void    lcd_7_seg_set(size_t index,uint8_t data);
 /*
- * ÊıÂë¹Ü×ÖÌåÖ§³Ö0~9£¬a~z(²»Çø·Ö´óĞ¡Ğ´)
+ * æ•°ç ç®¡å­—ä½“æ”¯æŒ0~9ï¼Œa~z(ä¸åŒºåˆ†å¤§å°å†™)
  */
 uint8_t lcd_7_seg_font_get(char ch);
 

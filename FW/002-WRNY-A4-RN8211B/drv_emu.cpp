@@ -21,13 +21,15 @@
 /*
  * 电流通道放大倍数(内部PGA)
  */
-#define EMU_I1PGA       (16.0)
-#define EMU_I2PGA       (4.0)
+#define EMU_I1PGA       (1.0)
+#define EMU_I2PGA       (1.0)
 
 /*
  * 电表常数
  */
-#define EMU_EC          (3000)
+#ifndef EMU_EC
+#define EMU_EC          (1000)
+#endif
 
 const emu_cal_data_t emu_cal_data_default=
 {
@@ -56,11 +58,11 @@ void emu_init(void)
     LL_SYSC_AnaPowerCtrl(LL_SYSC_PD_ADCI1,ERN_ENABLE);
     LL_SYSC_AnaPowerCtrl(LL_SYSC_PD_ADCI2,ERN_ENABLE);
     /*
-     * 配置PGA,U=1倍,I1=16倍，I2=4倍
+     * 配置PGA,U=1倍,I1=1倍，I2=1倍
      */
     LL_SYSC_ADCPGACtrl(LL_SYSC_ADCCHN_U,LL_SYSC_ADCPGA_1);
-    LL_SYSC_ADCPGACtrl(LL_SYSC_ADCCHN_I1,LL_SYSC_ADCPGA_16);
-    LL_SYSC_ADCPGACtrl(LL_SYSC_ADCCHN_I2,LL_SYSC_ADCPGA_4);
+    LL_SYSC_ADCPGACtrl(LL_SYSC_ADCCHN_I1,LL_SYSC_ADCPGA_1);
+    LL_SYSC_ADCPGACtrl(LL_SYSC_ADCCHN_I2,LL_SYSC_ADCPGA_1);
 
     /*
      * 启用EMU模块

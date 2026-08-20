@@ -76,6 +76,18 @@ enum
 void    lcd_seg_set(size_t index,bool is_set);
 bool    lcd_seg_get(size_t index);
 
+/*
+ * 设置七段数码显示。
+ * 数据位 0 1 2 3 4 5 6 7
+ * 显示段 a b c d e f g dp
+ */
+uint8_t lcd_7_seg_get(size_t index);
+void    lcd_7_seg_set(size_t index,uint8_t data);
+/*
+ * 数码管字体支持0~9，a~z(不区分大小写)
+ */
+uint8_t lcd_7_seg_font_get(char ch);
+
 
 #ifdef __cplusplus
 }

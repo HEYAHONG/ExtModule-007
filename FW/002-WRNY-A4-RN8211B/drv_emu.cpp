@@ -51,7 +51,7 @@ const emu_cal_data_t *emu_cal_data_get_default(void)
 
 /*
  * 在由硬件电路计算的理论值基础上进行校准,不校准时其值为1.0。
- * 系数=实际值/理论值
+ * 系数=实际值(由外部确定的值)/理论值(由默认参数乘以寄存器值获得的值)
  * 一般仅用于微调，当相差太多时应调整硬件参数
  */
 static double emu_cal_manual_kv     =1.0;

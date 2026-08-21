@@ -26,9 +26,23 @@ typedef struct
     uint16_t    HFCONST2;   //HFCONST2值
 } emu_cal_data_t;
 
-extern const emu_cal_data_t emu_cal_data_default;
 
-const emu_cal_data_t *emu_cal_data_get(void);
+const emu_cal_data_t *emu_cal_data_get_default(void);
+double * emu_cal_data_get_manual_kv(void);
+double * emu_cal_data_get_manual_ki1(void);
+double * emu_cal_data_get_manual_ki2(void);
+void emu_cal_data_load(void);
+void emu_cal_data_save(void);
+
+
+double      emu_cal_data_get_kv(void);
+double      emu_cal_data_get_ki1(void);
+double      emu_cal_data_get_ki2(void);
+double      emu_cal_data_get_kp1(void);
+double      emu_cal_data_get_kp2(void);
+uint16_t    emu_cal_data_get_hfconst1(void);
+uint16_t    emu_cal_data_get_hfconst2(void);
+
 
 #ifdef __cplusplus
 }

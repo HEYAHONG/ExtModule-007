@@ -196,3 +196,68 @@ void emu_init(void)
     EMU->SPCMD=0xDC;
 }
 
+
+double emu_data_get(emu_data_type_t type)
+{
+    double ret=0;
+    switch(type)
+    {
+    case EMU_DATA_U:
+    {
+        ret=EMU->URMS*emu_cal_data_get_kv();
+    }
+    break;
+    case EMU_DATA_I1:
+    {
+        ret=EMU->IARMS*emu_cal_data_get_ki1();
+    }
+    break;
+    case EMU_DATA_I2:
+    {
+        ret=EMU->IBRMS*emu_cal_data_get_ki2();
+    }
+    break;
+    case EMU_DATA_P1:
+    {
+        ret=EMU->PowerPA*emu_cal_data_get_kp1();
+    }
+    break;
+    case EMU_DATA_P2:
+    {
+        ret=EMU->PowerPB*emu_cal_data_get_kp2();
+    }
+    break;
+    case EMU_DATA_Q1:
+    {
+        ret=EMU->PowerQA*emu_cal_data_get_kp1();
+    }
+    break;
+    case EMU_DATA_Q2:
+    {
+        ret=EMU->PowerQB*emu_cal_data_get_kp2();
+    }
+    break;
+    case EMU_DATA_S1:
+    {
+        ret=EMU->PowerSA*emu_cal_data_get_kp1();
+    }
+    break;
+    case EMU_DATA_S2:
+    {
+        ret=EMU->PowerSB*emu_cal_data_get_kp2();
+    }
+    break;
+    case EMU_DATA_FREQ:
+    {
+        ret=1.8432E6/4.0/EMU->Ufreq;
+    }
+    break;
+    default:
+    {
+
+    }
+    break;
+    }
+    return ret;
+}
+

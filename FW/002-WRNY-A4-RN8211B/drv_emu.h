@@ -43,6 +43,28 @@ double      emu_cal_data_get_kp2(void);
 uint16_t    emu_cal_data_get_hfconst1(void);
 uint16_t    emu_cal_data_get_hfconst2(void);
 
+typedef enum
+{
+    EMU_DATA_U=0,                       //电压
+    EMU_DATA_I1,                        //电流(通道1)
+    EMU_DATA_I2,                        //电流(通道2)
+    EMU_DATA_P1,                        //有功功率(通道1)
+    EMU_DATA_P2,                        //有功功率(通道2)
+    EMU_DATA_Q1,                        //无功功率(通道1)
+    EMU_DATA_Q2,                        //无功功率(通道2)
+    EMU_DATA_S1,                        //视在功率(通道1)
+    EMU_DATA_S2,                        //视在功率(通道2)
+    EMU_DATA_FREQ,                      //频率(电压)
+    EMU_DATA_I=EMU_DATA_I1,
+    EMU_DATA_P=EMU_DATA_P1,
+    EMU_DATA_Q=EMU_DATA_Q1,
+    EMU_DATA_S=EMU_DATA_S1,
+}   emu_data_type_t;
+
+/*
+ * 获取计量数据，返回人类可读(采用国际单位制)的数据
+ */
+double emu_data_get(emu_data_type_t type);
 
 #ifdef __cplusplus
 }

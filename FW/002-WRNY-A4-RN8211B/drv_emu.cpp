@@ -219,32 +219,32 @@ double emu_data_get(emu_data_type_t type)
     break;
     case EMU_DATA_P1:
     {
-        ret=EMU->PowerPA*emu_cal_data_get_kp1();
+        ret=((int32_t)EMU->PowerPA)*emu_cal_data_get_kp1();
     }
     break;
     case EMU_DATA_P2:
     {
-        ret=EMU->PowerPB*emu_cal_data_get_kp2();
+        ret=((int32_t)EMU->PowerPB)*emu_cal_data_get_kp2();
     }
     break;
     case EMU_DATA_Q1:
     {
-        ret=EMU->PowerQA*emu_cal_data_get_kp1();
+        ret=((int32_t)EMU->PowerQA)*emu_cal_data_get_kp1();
     }
     break;
     case EMU_DATA_Q2:
     {
-        ret=EMU->PowerQB*emu_cal_data_get_kp2();
+        ret=((int32_t)EMU->PowerQB)*emu_cal_data_get_kp2();
     }
     break;
     case EMU_DATA_S1:
     {
-        ret=EMU->PowerSA*emu_cal_data_get_kp1();
+        ret=((int32_t)EMU->PowerSA)*emu_cal_data_get_kp1();
     }
     break;
     case EMU_DATA_S2:
     {
-        ret=EMU->PowerSB*emu_cal_data_get_kp2();
+        ret=((int32_t)EMU->PowerSB)*emu_cal_data_get_kp2();
     }
     break;
     case EMU_DATA_FREQ:

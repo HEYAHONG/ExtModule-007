@@ -120,7 +120,7 @@ int main()
 
     hruntime_init_lowlevel();
 
-    xTaskCreate( hbox_task_entry, "hbox_task",2048/sizeof(StackType_t), NULL, 1, NULL );
+    xTaskCreate( hbox_task_entry, "hbox_task",2560/sizeof(StackType_t), NULL, 1, NULL );
 
     vTaskStartScheduler();
 

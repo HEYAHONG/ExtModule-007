@@ -32,9 +32,16 @@ extern const struct fal_flash_dev eeprom0;
 }
 #endif /* FAL_PART_HAS_TABLE_CFG */
 
-extern struct fdb_kvdb fdb_kvdb1;
-extern struct fdb_tsdb fdb_tsdb1;
 void flashdb_init(void);
+
+
+struct fdb_kvdb;
+void flashdb_kvdb_init(struct fdb_kvdb * kvdb);
+void flashdb_kvdb_deinit(struct fdb_kvdb * kvdb);
+
+struct fdb_tsdb;
+void flashdb_tsdb_init(struct fdb_tsdb * tsdb);
+void flashdb_tsdb_deinit(struct fdb_tsdb * tsdb);
 
 #ifdef __cplusplus
 }

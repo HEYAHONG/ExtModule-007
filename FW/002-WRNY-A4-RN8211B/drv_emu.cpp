@@ -105,7 +105,9 @@ uint16_t    emu_cal_data_get_hfconst2(void)
 
 void emu_cal_data_load(void)
 {
-
+    struct fdb_kvdb fdb_kvdb1;
+    memset(&fdb_kvdb1,0,sizeof(fdb_kvdb1));
+    flashdb_kvdb_init(&fdb_kvdb1);
     struct fdb_blob blob;
     {
         double val=0;
@@ -143,10 +145,16 @@ void emu_cal_data_load(void)
         }
     }
 
+    flashdb_kvdb_deinit(&fdb_kvdb1);
+
 }
 
 void emu_cal_data_save(void)
 {
+    struct fdb_kvdb fdb_kvdb1;
+    memset(&fdb_kvdb1,0,sizeof(fdb_kvdb1));
+    flashdb_kvdb_init(&fdb_kvdb1);
+
     struct fdb_blob blob;
     {
         double val= emu_cal_manual_kv;
@@ -160,6 +168,7 @@ void emu_cal_data_save(void)
         double val= emu_cal_manual_ki2;
         fdb_kv_set_blob(&fdb_kvdb1, "manual_ki2", fdb_blob_make(&blob, &val, sizeof(val)));
     }
+    flashdb_kvdb_deinit(&fdb_kvdb1);
 }
 
 void emu_init(void)

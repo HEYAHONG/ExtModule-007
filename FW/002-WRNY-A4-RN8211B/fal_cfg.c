@@ -67,8 +67,6 @@ const struct fal_flash_dev eeprom0=
     32
 };
 
-struct fdb_kvdb fdb_kvdb1 = {};
-struct fdb_tsdb fdb_tsdb1 = {};
 /*
  * fdb锁
  */
@@ -109,12 +107,45 @@ static fdb_time_t fdb_tsdb1_get_time(void)
 void flashdb_init(void)
 {
     fdb_handle=xSemaphoreCreateRecursiveMutexStatic(&fdb_buffer);
-    fdb_kvdb_control(&fdb_kvdb1, FDB_KVDB_CTRL_SET_LOCK, (void *)fdb_kvdb1_lock);
-    fdb_kvdb_control(&fdb_kvdb1, FDB_KVDB_CTRL_SET_UNLOCK, (void *)fdb_kvdb1_unlock);
-    fdb_kvdb_init(&fdb_kvdb1,"fdb_kvdb1","fdb_kvdb1",NULL,NULL);
-    fdb_tsdb_control(&fdb_tsdb1, FDB_TSDB_CTRL_SET_LOCK, (void *)fdb_tsdb1_lock);
-    fdb_tsdb_control(&fdb_tsdb1, FDB_TSDB_CTRL_SET_UNLOCK, (void *)fdb_tsdb1_unlock);
-    fdb_tsdb_init(&fdb_tsdb1,"fdb_tsdb1","fdb_tsdb1",fdb_tsdb1_get_time,32,NULL);
+}
 
+void flashdb_kvdb_init(struct fdb_kvdb * kvdb)
+{
+    if(kvdb==NULL)
+    {
+        return;
+    }
+    fdb_kvdb_control(kvdb, FDB_KVDB_CTRL_SET_LOCK, (void *)fdb_kvdb1_lock);
+    fdb_kvdb_control(kvdb, FDB_KVDB_CTRL_SET_UNLOCK, (void *)fdb_kvdb1_unlock);
+    fdb_kvdb_init(kvdb,"fdb_kvdb1","fdb_kvdb1",NULL,NULL);
+}
+
+void flashdb_kvdb_deinit(struct fdb_kvdb * kvdb)
+{
+    if(kvdb==NULL)
+    {
+        return;
+    }
+    fdb_kvdb_deinit(kvdb);
+}
+
+void flashdb_tsdb_init(struct fdb_tsdb * tsdb)
+{
+    if(tsdb==NULL)
+    {
+        return;
+    }
+    fdb_tsdb_control(tsdb, FDB_TSDB_CTRL_SET_LOCK, (void *)fdb_tsdb1_lock);
+    fdb_tsdb_control(tsdb, FDB_TSDB_CTRL_SET_UNLOCK, (void *)fdb_tsdb1_unlock);
+    fdb_tsdb_init(tsdb,"fdb_tsdb1","fdb_tsdb1",fdb_tsdb1_get_time,32,NULL);
+}
+
+void flashdb_tsdb_deinit(struct fdb_tsdb * tsdb)
+{
+    if(tsdb==NULL)
+    {
+        return;
+    }
+    fdb_tsdb_deinit(tsdb);
 }
 

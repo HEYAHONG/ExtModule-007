@@ -3,6 +3,7 @@
 #include "flashdb.h"
 #include "drv_lcd.h"
 #include "drv_emu.h"
+#include "dlt645.h"
 
 static void hw_feed()
 {
@@ -103,9 +104,11 @@ static void hbox_task_entry(void *usr)
     lcd_init();
     flashdb_init();
     emu_init();
+    dlt645_init();
     hcpprt_init();
     while(1)
     {
+        dlt645_loop();
         hcpprt_loop();
         vTaskDelay(5);
     }

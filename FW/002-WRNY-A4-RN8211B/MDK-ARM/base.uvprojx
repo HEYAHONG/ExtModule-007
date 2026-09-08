@@ -413,6 +413,16 @@
               <FileType>8</FileType>
               <FilePath>..\drv_emu.cpp</FilePath>
             </File>
+            <File>
+              <FileName>dlt645.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\dlt645.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>drv_uart0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\drv_uart0.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

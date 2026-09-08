@@ -53,4 +53,35 @@
  */
 #define FDB_USING_TIMESTAMP_64BIT 1
 
+#if defined(HNET_IMPLEMENTATION)
+#include "hcompiler.h"
+#include "hdefaults.h"
+#include "hnet.h"
+/*
+ * 启用栈作为DLT645协议缓冲
+ */
+#define HDLT645_SLAVE_IO_NO_TX_BUFFER 1
+
+/*
+ * 时间同步
+ */
+extern const hdlt645_slave_time_t dlt645_slave_time;
+#define HDLT645_SLAVE_TIME_SYNC (&dlt645_slave_time)
+
+
+/*
+ * 写地址
+ */
+extern const hdlt645_slave_writeaddr_t dlt645_io_ctx_write_addr;
+#define HDLT645_SLAVE_WRITEADDR (&dlt645_io_ctx_write_addr)
+
+
+/*
+ * 修改通信速率
+ */
+extern const hdlt645_slave_com_z_t dlt645_io_ctx_com_z;
+#define HDLT645_SLAVE_COM_Z (&dlt645_io_ctx_com_z)
+
+#endif
+
 #endif  // __HBOX_CONFIG_H__

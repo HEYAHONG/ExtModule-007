@@ -53,14 +53,12 @@
  */
 #define FDB_USING_TIMESTAMP_64BIT 1
 
+
 #if defined(HNET_IMPLEMENTATION)
 #include "hcompiler.h"
 #include "hdefaults.h"
 #include "hnet.h"
-/*
- * 启用栈作为DLT645协议缓冲
- */
-#define HDLT645_SLAVE_IO_NO_TX_BUFFER 1
+
 
 /*
  * 时间同步

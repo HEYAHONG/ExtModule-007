@@ -2,6 +2,7 @@
 #include "drv_uart0.h"
 #include "hbox.h"
 #include "flashdb.h"
+#include "drv_emu.h"
 
 static hdlt645_slave_io_ctx_t io_ctx;
 
@@ -127,3 +128,163 @@ const hdlt645_slave_com_z_t dlt645_io_ctx_com_z=
     io_ctx_change_com_z,
     0
 };
+
+void dlt645_di_set_time(const hdlt645_slave_di_t *di,uint8_t mm,uint8_t hh,uint8_t DD,uint8_t MM,uint8_t YY)
+{
+
+}
+void dlt645_di_reset_time(const hdlt645_slave_di_t *di)
+{
+
+}
+void dlt645_di_write_enable(const hdlt645_slave_di_t *di,hdlt645_data_p_t *p,hdlt645_data_c_t *c)
+{
+
+}
+void dlt645_di_write_disable(const hdlt645_slave_di_t *di)
+{
+
+}
+size_t dlt645_di_getlen(const hdlt645_slave_di_t *di)
+{
+    if(di==NULL)
+    {
+        return 0;
+    }
+
+    size_t ret=0;
+
+    switch(di->di_num)
+    {
+    case 0x02010100:
+    {
+        ret=2;
+    }
+    break;
+    case 0x02020100:
+    case 0x02020101:
+    case 0x02030000:
+    case 0x02030001:
+    case 0x02040000:
+    case 0x02040001:
+    case 0x02050000:
+    case 0x02050001:
+    {
+        ret=3;
+    }
+    break;
+    case 0x02800002:
+    {
+        ret=2;
+    }
+    break;
+    default:
+    {
+
+    }
+    break;
+    }
+
+    return ret;
+}
+size_t dlt645_di_write(const hdlt645_slave_di_t *di,const uint8_t *buff,size_t length)
+{
+    if(di==NULL || buff == NULL || length == 0)
+    {
+        return 0;
+    }
+    size_t ret= dlt645_di_getlen(di);
+    if(ret > length)
+    {
+        ret=length;
+    }
+
+    return ret;
+}
+
+static void dlt645_di_bcd_data_uint64_set(uint8_t *buff,size_t length,uint64_t bcd_data)
+{
+    if(buff == NULL || length == 0)
+    {
+        return;
+    }
+
+    for(size_t i=0; i<length; i++)
+    {
+        buff[i]=(bcd_data&0xFF);
+        bcd_data >>= 8;
+    }
+}
+size_t dlt645_di_read(const hdlt645_slave_di_t *di,uint8_t *buff,size_t length)
+{
+    if(di==NULL || buff == NULL || length == 0)
+    {
+        return 0;
+    }
+    size_t ret= dlt645_di_getlen(di);
+    if(ret > length)
+    {
+        ret=length;
+    }
+
+    switch(di->di_num)
+    {
+    case 0x02010100:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_U)*10));
+    }
+    break;
+    case 0x02020100:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_I1)*1000));
+    }
+    break;
+    case 0x02020101:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_I2)*1000));
+    }
+    break;
+    case 0x02030000:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_P1)/1000*10000));
+    }
+    break;
+    case 0x02030001:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_P2)/1000*10000));
+    }
+    break;
+    case 0x02040000:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_Q1)/1000*10000));
+    }
+    break;
+    case 0x02040001:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_Q2)/1000*10000));
+    }
+    break;
+    case 0x02050000:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_S1)/1000*10000));
+    }
+    break;
+    case 0x02050001:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_S2)/1000*10000));
+    }
+    break;
+    case 0x02800002:
+    {
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_FREQ)*100));
+    }
+    break;
+    default:
+    {
+
+    }
+    break;
+    }
+
+    return ret;
+}

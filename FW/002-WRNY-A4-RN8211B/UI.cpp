@@ -18,6 +18,10 @@ static void ui_lcd_clear(void)
 
 static void ui_lcd_show_number(char sign,double num,bool up,bool down)
 {
+    if(num < 0)
+    {
+        num = (-num);
+    }
     ui_lcd_clear();
     lcd_7_seg_set(1+0,lcd_7_seg_font_get(sign));
     if(num < 10.0)

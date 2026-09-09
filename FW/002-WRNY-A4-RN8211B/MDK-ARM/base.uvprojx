@@ -423,6 +423,11 @@
               <FileType>8</FileType>
               <FilePath>..\drv_uart0.cpp</FilePath>
             </File>
+            <File>
+              <FileName>UI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\UI.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

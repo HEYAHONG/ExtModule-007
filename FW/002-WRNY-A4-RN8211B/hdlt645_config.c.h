@@ -1,4 +1,4 @@
-#ifndef  __HDLT645_CONFIG_C_H__
+﻿#ifndef  __HDLT645_CONFIG_C_H__
 #define  __HDLT645_CONFIG_C_H__
 
 #include "hcompiler.h"

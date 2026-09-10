@@ -202,6 +202,15 @@ size_t dlt645_di_write(const hdlt645_slave_di_t *di,const uint8_t *buff,size_t l
     return ret;
 }
 
+static inline double  dlt645_di_abs(double data)
+{
+    if(data > 0)
+    {
+        return data;
+    }
+    return -data;
+}
+
 static void dlt645_di_bcd_data_uint64_set(uint8_t *buff,size_t length,uint64_t bcd_data)
 {
     if(buff == NULL || length == 0)
@@ -231,52 +240,52 @@ size_t dlt645_di_read(const hdlt645_slave_di_t *di,uint8_t *buff,size_t length)
     {
     case 0x02010100:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_U)*10));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_U))*10));
     }
     break;
     case 0x02020100:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_I1)*1000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_I1))*1000));
     }
     break;
     case 0x02020101:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_I2)*1000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_I2))*1000));
     }
     break;
     case 0x02030000:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_P1)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_P1))/1000*10000));
     }
     break;
     case 0x02030001:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_P2)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_P2))/1000*10000));
     }
     break;
     case 0x02040000:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_Q1)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_Q1))/1000*10000));
     }
     break;
     case 0x02040001:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_Q2)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_Q2))/1000*10000));
     }
     break;
     case 0x02050000:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_S1)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_S1))/1000*10000));
     }
     break;
     case 0x02050001:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_S2)/1000*10000));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_S2))/1000*10000));
     }
     break;
     case 0x02800002:
     {
-        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(emu_data_get(EMU_DATA_FREQ)*100));
+        dlt645_di_bcd_data_uint64_set(buff,ret, hdlt645_uint64_to_bcd(dlt645_di_abs(emu_data_get(EMU_DATA_FREQ))*100));
     }
     break;
     default:

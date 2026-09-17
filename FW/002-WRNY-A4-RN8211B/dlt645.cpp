@@ -136,6 +136,16 @@ const hdlt645_slave_com_z_t dlt645_io_ctx_com_z=
     0
 };
 
+void dlt645_di_set_n(const hdlt645_slave_di_t *di,uint8_t N)
+{
+    
+}
+
+void dlt645_di_unset_n(const hdlt645_slave_di_t *di)
+{
+    
+}
+
 void dlt645_di_set_time(const hdlt645_slave_di_t *di,uint8_t mm,uint8_t hh,uint8_t DD,uint8_t MM,uint8_t YY)
 {
 

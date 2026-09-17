@@ -65,15 +65,22 @@ static void dlt645_slave_time_sync(const hdlt645_slave_time_t *time,uint8_t ss,u
 {
     htimeval_t tv;
     memset(&tv,0,sizeof(tv));
+    hsyscall_gettimeofday(&tv,NULL);
     {
         htm_t tm;
         memset(&tm,0,sizeof(tm));
+        htime_t current_time=tv.tv_sec;
+        hlibc_localtime_r(&current_time,&tm);
+        if(tm.tm_year+1900 < 2000)
+        {
+            tm.tm_year=2000-1900;
+        }
         tm.tm_sec=hdlt645_bcd_to_uint64(ss);
         tm.tm_min=hdlt645_bcd_to_uint64(mm);
         tm.tm_hour=hdlt645_bcd_to_uint64(hh);
         tm.tm_mday=hdlt645_bcd_to_uint64(DD);
         tm.tm_mon=hdlt645_bcd_to_uint64(MM)-1;
-        tm.tm_year=hdlt645_bcd_to_uint64(YY)+2000;
+        tm.tm_year=((unsigned)tm.tm_year)/100*100+hdlt645_bcd_to_uint64(YY);
         tv.tv_sec=hlibc_mktime(&tm);
     }
     hsyscall_settimeofday(&tv,NULL);

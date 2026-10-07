@@ -1,26 +1,24 @@
 /***************************************************************
- * Name:      hnet.h
- * Purpose:   声明hnet接口
+ * Name:      htcpip_link.h
+ * Purpose:   声明htcpip_link接口
  * Author:    HYH (hyhsystem.cn)
- * Created:   2025-05-03
+ * Created:   2026-09-30
  * Copyright: HYH (hyhsystem.cn)
  * License:   MIT
  **************************************************************/
-#ifndef __HNET_H__
-#define __HNET_H__
+#ifndef __HTCPIP_LINK_H__
+#define __HTCPIP_LINK_H__
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif // __cplusplus
 
-#include "fieldbus/hmodbus.h"
-#include "fieldbus/hdlt645.h"
-#include "tcpip/htcpip.h"
+#include "hethernet/hethernet.h"
 
 #ifdef __cplusplus
 }
 #endif // __cplusplus
 
 
-#endif // __HNET_H__
+#endif // __HTCPIP_LINK_H__

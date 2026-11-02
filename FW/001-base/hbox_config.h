@@ -42,5 +42,11 @@
  */
 #define HDEFAULTS_SYSCALL_NO_IMPLEMENTATION 1
 
+/*
+ * 关闭部分不兼容的syscall
+ */
+#define HDEFAULTS_SYSCALL_NO_HMKDIR 1
+#define HDEFAULTS_SYSCALL_NO_HFSYNC 1
+
 
 #endif  // __HBOX_CONFIG_H__
